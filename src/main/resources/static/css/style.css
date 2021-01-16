@@ -1,0 +1,346 @@
+a {
+    text-decoration: none !important;
+}
+
+ul {
+    list-style: none;
+}
+
+body {
+    background: #fdfdfd;
+}
+
+/* START CSS HEADER */
+
+header {
+    background: white;
+    border-bottom: 1px solid #ecf0f5;
+}
+
+header nav {
+    padding: 10px 0;
+}
+
+header .menu ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .menu a {
+    color: #bdbac2;
+}
+
+header .menu .active {
+    color: #2092ec;
+}
+
+header .menu ul li a i {
+    font-size: 40px;
+    transition: .5s;
+}
+
+header .menu ul li a i:hover {
+    color: #2092ec;
+}
+
+header .menu ul li .logout i:hover {
+    color: red !important;
+}
+
+header .menu ul li .avatar {
+    width: 100%;
+    height: 60px;
+    min-width: 60px;
+    max-width: 60px;
+    border: 3px solid #2196f3;
+    border-radius: 100%;
+    transition: .5s;
+}
+
+header .menu ul li .avatar:hover {
+    border: 3px solid green;
+}
+
+/* END CSS HEADER */
+
+/* START CSS MAIN */
+
+/* CSS MAIN SIDEBAR */
+
+main {
+    overflow: auto;
+}
+
+main .row>* {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+main .sidebar {
+    background-color: white;
+    border-right: 1px solid #ecf0f5;
+    padding: 20px;
+}
+
+main .sidebar input {
+    background: #f4f4f4;
+    padding: 15px 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+main .sidebar .search {
+    margin-bottom: 30px;
+}
+
+main .sidebar .content ul {
+    display: flex;
+    justify-content: space-around;
+    color: #bdbac2;
+}
+
+main .sidebar .content ul li a {
+    color: #bdbac2;
+    font-weight: bold;
+}
+
+main .sidebar .content .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #2196f3;
+    background-color: #f5f5f5;
+    border-radius: 20px;
+}
+
+main .sidebar .content .member a {
+    color: black;
+    display: flex;
+    align-items: flex-start;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 55px;
+    min-width: 55px;
+    max-width: 55px;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    margin-right: 15px;
+}
+
+main .sidebar .content .member .status {
+    color: #bbbbbb;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    left: 10px;
+    border: 5px solid #fff;
+    margin-top: 12px;
+    border-radius: 100%;
+}
+
+main .sidebar .content .member .status i {
+    position: absolute;
+    left: -3px;
+    bottom: -3px;
+    font-size: 16px;
+}
+
+main .sidebar .content .member .status .active {
+    color: green;
+}
+
+main .sidebar .content .member .data .name {
+    display: inline-flex;
+    font-size: 16px;
+    font-weight: 700;
+    color: #212529;
+    margin-bottom: 8px
+}
+
+main .sidebar .content .member .data .date-send {
+    float: right;
+    font-size: 14px;
+    color: #bdbac2;
+}
+
+main .sidebar .content .member .data .short-chat {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 400;
+    color: #bdbac2;
+}
+
+main .sidebar .content .member .data .read {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 500;
+    color: black;
+}
+
+main .main-chat .top {
+    padding: 20px;
+    border-bottom: 1px solid #ecf0f5;
+}
+
+main .main-chat .top .inside {
+    display: flex;
+    align-items: center;
+}
+
+main .main-chat .top .inside .status {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    right: 0;
+    left: 10px;
+    border: 5px solid #fff;
+    border-radius: 100%;
+    margin-top: 0;
+    margin-right: 10px;
+    color: #bbbbbb;
+}
+
+main .main-chat .top .inside .status i {
+    position: absolute;
+    left: -3px;
+    bottom: -3px;
+    font-size: 16px;
+}
+
+main .main-chat .top .inside .status .active {
+    color: green;
+}
+
+main .main-chat .top .inside .data {
+    margin-right: auto;
+}
+
+main .main-chat .top .inside .btn-groups :hover i {
+    color: #2092ec;
+}
+
+main .main-chat .top .inside .btn-groups button {
+    background: none;
+    outline: none;
+    border: none;
+}
+
+main .main-chat .top .inside .btn-groups button i {
+    font-size: 25px;
+    color: #bdbac2;
+    margin-right: 30px;
+    transition: .5s;
+}
+
+main .main-chat .top .inside .btn-groups ul {
+    min-width: 15rem;
+    padding: 10px;
+}
+
+main .main-chat .top .inside .btn-groups .dropdown-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all .3s;
+}
+
+main .main-chat .top .inside .btn-groups ul li:hover {
+    background: #eee;
+    border-radius: 5px;
+}
+
+main .main-chat .content {
+    padding: 20px;
+    height: calc(100vh - 302px);
+    overflow-y: auto;
+}
+
+main .main-chat .content::-webkit-scrollbar {
+    width: 5px;
+}
+
+main .main-chat .content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+main .main-chat .content::-webkit-scrollbar-thumb {
+    background: #2092ec;
+}
+
+main .main-chat .content::-webkit-scrollbar-thumb:hover {
+    background: red;
+}
+
+main .main-chat .content .date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 26px 0 46px;
+}
+
+main .main-chat .content .message {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+main .main-chat .content .message .text {
+    display: inline-block;
+    padding: 15px;
+    max-width: 450px;
+    background: #f5f5f5;
+    border-radius: 6px;
+}
+
+main .main-chat .content .message.me {
+    justify-content: flex-end;
+}
+
+main .main-chat .content .message .text-group.me {
+    display: flex;
+    justify-content: flex-end;
+}
+
+main .main-chat .content .message .text.me {
+    background: #2196F3;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+    color: white;
+}
+
+main .main-chat .content .message.me span {
+    text-align: right;
+    display: block;
+}
+
+main .main-chat .bottom {
+    padding: 20px;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    border-top: 2px solid #ecf0f5;
+}
+
+main .main-chat .bottom .send-input textarea {
+    padding: 15px;
+    background: #f5f5f5;
+    width: 100%;
+}
+
+main .main-chat .bottom .send-input textarea::-webkit-scrollbar {
+    display: none;
+}
+
+main .main-chat .bottom i {
+    font-size: 30px;
+    color: #bdbac2;
+    margin-right: 15px;
+    cursor: pointer;
+}

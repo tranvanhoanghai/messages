@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>App Fragments</title>
+</head>
+<body>
+
+
+<!-- Default Header -->
+
+<nav class="container menu" th:fragment="nav-default">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/}"><i class="far fa-comment"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="far fa-user"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" ><i class="fas fa-cog"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link logout" href="#"><i class="fas fa-power-off"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+                <img class="avatar" th:src="@{img/avatars/avatar-female-6.jpg}" alt="">
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+<!--<div th:fragment="copyright">-->
+<!--    &copy; o7planning.org-->
+<!--</div>-->
+
+</body>
+</html>
