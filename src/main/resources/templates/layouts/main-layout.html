@@ -19,7 +19,7 @@
 
 </header>
 
-<main class="container-fluid">
+<main>
     <div th:replace="${mainContent} ?: ~{}">
 
     </div>
@@ -31,7 +31,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://kit.fontawesome.com/f5e0eb0af6.js" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const body = document.querySelector('body')
+        const toggleSwitch = document.querySelector('.switch')
 
+        toggleSwitch.addEventListener('click', (e) => {
+            body.classList.toggle('dark'),
+            ["fa-moon", "fa-sun"].forEach(
+                c => e.target.classList.toggle(c));
+            })
+    })
+</script>
 <th:block th:replace="${script} ?: ~{}"></th:block>
 </body>
 </html>

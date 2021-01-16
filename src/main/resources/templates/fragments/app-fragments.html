@@ -8,28 +8,41 @@
 
 
 <!-- Default Header -->
-
+<!--th:fragment="nav-default"-->
 <nav class="container menu" th:fragment="nav-default">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link active" th:href="@{/}"><i class="far fa-comment"></i></a>
+            <a class="nav-link active" href="index.html"><i class="far fa-comment"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#"><i class="far fa-user"></i></a>
+            <a class="nav-link" href="home.html"><i class="fas fa-home"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#" ><i class="fas fa-cog"></i></a>
+            <a class="nav-link" href="#"><i class="switch far fa-moon"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link logout" href="#"><i class="fas fa-power-off"></i></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">
-                <img class="avatar" th:src="@{img/avatars/avatar-female-6.jpg}" alt="">
-            </a>
+            <div class="dropdown d-inline">
+                <a class="nav-link" href="#" data-bs-toggle="dropdown">
+                    <img class="avatar" src="img/avatars/avatar-female-6.jpg" alt="">
+                </a>
+                <ul class="dropdown-menu" style="z-index: 9;">
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            <i class="far fa-user"></i>
+                            <span>Profile</span>
+                        </a>
+                    </li>
+                    <li class="logout">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-power-off"></i>
+                            <span>Logout</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
     </ul>
 </nav>

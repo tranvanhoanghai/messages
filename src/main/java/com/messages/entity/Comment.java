@@ -1,9 +1,12 @@
 package com.messages.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "comments")
+@Data
 public class Comment extends BaseEntity
 {
     @ManyToOne

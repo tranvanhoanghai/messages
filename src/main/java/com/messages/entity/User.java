@@ -9,8 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 @Data
-public class User extends BaseEntity{
-
+public class User extends BaseEntity
+{
     @Column
     private String userImg;
 

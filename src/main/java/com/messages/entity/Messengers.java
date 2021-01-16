@@ -8,8 +8,8 @@ import java.util.Date;
 @Entity
 @Table(name = "messengers")
 @Data
-public class Messengers extends BaseEntity{
-
+public class Messengers extends BaseEntity
+{
     @ManyToOne
     @JoinColumn(name = "user_send")
     private User user_send;

@@ -25,260 +25,264 @@
     menu
 </header>
 
+<div class="chat" id="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-lg-4 col-xl-2">
+                <div class="sidebar" style="height: 90vh;">
+                    <div class="search">
+                        <input type="text" class="form-control" id="" placeholder="Search for conversations">
+                    </div>
 
-<div class="row" id="main">
-    <div class="col-md-4 col-lg-4 col-xl-2">
-        <div class="sidebar" style="height: 90vh;">
-            <div class="search">
-                <input type="text" class="form-control" id="" placeholder="Search for conversations">
+                    <div class="content">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-bs-toggle="pill" href="#all">All</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link"  data-bs-toggle="pill" href="#read">Read</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="pill" href="#unread" >Unread</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="all">
+                                <div class="member">
+                                    <a href="#">
+                                        <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
+                                        <div class="status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <div class="data">
+                                            <h5 class="name">Janette Dalton</h5>
+                                            <span class="date-send read">Mon</span>
+                                            <p class="short-chat read">A new feature has been updated to your account. Check it out...</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="member">
+                                    <a href="#">
+                                        <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
+                                        <div class="status">
+                                            <i class="fas fa-circle active"></i>
+                                        </div>
+                                        <div class="data">
+                                            <h5 class="name">Janette Dalton</h5>
+                                            <span class="date-send">Mon</span>
+                                            <p class="short-chat">A new feature has been updated to your account. Check it out...</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="member">
+                                    <a href="#">
+                                        <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
+                                        <div class="status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <div class="data">
+                                            <h5 class="name">Janette Dalton</h5>
+                                            <span class="date-send">Mon</span>
+                                            <p class="short-chat">A new feature has been updated to your account. Check it out...</p>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="member">
+                                    <a href="#">
+                                        <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
+                                        <div class="status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <div class="data">
+                                            <h5 class="name">Janette Dalton</h5>
+                                            <span class="date-send">Mon</span>
+                                            <p class="short-chat">A new feature has been updated to your account. Check it out...</p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="read">
+                                read
+                            </div>
+                            <div class="tab-pane fade" id="unread">
+                                unread
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="content">
-                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" data-bs-toggle="pill" href="#all">All</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link"  data-bs-toggle="pill" href="#read">Read</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" data-bs-toggle="pill" href="#unread" >Unread</a>
-                    </li>
-                </ul>
-
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="all">
-                        <div class="member">
-                            <a href="#">
-                                <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
+            <div class=" col-lg-8 col-xl-10">
+                <div class="main-chat">
+                    <div class="top">
+                        <div class="col-md-12">
+                            <div class="inside" style="position: relative;">
+                                <a href="#">
+                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">
+                                </a>
                                 <div class="status">
                                     <i class="fas fa-circle"></i>
                                 </div>
                                 <div class="data">
-                                    <h5 class="name">Janette Dalton</h5>
-                                    <span class="date-send read">Mon</span>
-                                    <p class="short-chat read">A new feature has been updated to your account. Check it out...</p>
+                                    <h5><a href="#">Keith Morris</a></h5>
+                                    <span>Active now</span>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="member">
-                            <a href="#">
-                                <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
-                                <div class="status">
-                                    <i class="fas fa-circle active"></i>
+                                <div class="btn-groups">
+                                    <button><i class="fas fa-phone-alt"></i></button>
+                                    <button><i class="fas fa-video"></i></button>
+                                    <div class="dropdown d-inline">
+                                        <button id="drop" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" style="margin: 0;"></i></button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><button class="dropdown-item"><i class="fas fa-times"></i>Clear History</button></li>
+                                            <li><button class="dropdown-item"><i class="fas fa-times-circle"></i>Block Contact</button></li>
+                                            <li><button class="dropdown-item"><i class="fas fa-trash"></i>Delete Contact</button></li>
+                                        </ul>
+                                    </div>
                                 </div>
-                                <div class="data">
-                                    <h5 class="name">Janette Dalton</h5>
-                                    <span class="date-send">Mon</span>
-                                    <p class="short-chat">A new feature has been updated to your account. Check it out...</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="member">
-                            <a href="#">
-                                <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
-                                <div class="status">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="data">
-                                    <h5 class="name">Janette Dalton</h5>
-                                    <span class="date-send">Mon</span>
-                                    <p class="short-chat">A new feature has been updated to your account. Check it out...</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="member">
-                            <a href="#">
-                                <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">
-                                <div class="status">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="data">
-                                    <h5 class="name">Janette Dalton</h5>
-                                    <span class="date-send">Mon</span>
-                                    <p class="short-chat">A new feature has been updated to your account. Check it out...</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="read">
-                        read
-                    </div>
-                    <div class="tab-pane fade" id="unread">
-                        unread
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-md-8 col-lg-8 col-xl-10">
-        <div class="main-chat">
-            <div class="top" style="position: relative;">
-                <div class="col-md-12">
-                    <div class="inside">
-                        <a href="#">
-                            <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">
-                        </a>
-                        <div class="status">
-                            <i class="fas fa-circle"></i>
-                        </div>
-                        <div class="data">
-                            <h5><a href="#">Keith Morris</a></h5>
-                            <span>Active now</span>
-                        </div>
-                        <div class="btn-groups">
-                            <button><i class="fas fa-phone-alt"></i></button>
-                            <button><i class="fas fa-video"></i></button>
-                            <div class="dropdown d-inline">
-                                <button id="dropdown" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" style="margin: 0;"></i></button>
-                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown">
-                                    <li><button class="dropdown-item"><i class="fas fa-times"></i>Clear History</button></li>
-                                    <li><button class="dropdown-item"><i class="fas fa-times-circle"></i>Block Contact</button></li>
-                                    <li><button class="dropdown-item"><i class="fas fa-trash"></i>Delete Contact</button></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="content" id="content">
-                <div class="container-fuild">
-                    <div class="col-lg-12">
-                        <div class="date">
-                            <hr>
-                            <span>Yesterday</span>
-                            <hr>
-                        </div>
+                    <div class="content" id="content">
+                        <div class="container-fuild">
+                            <div class="col-lg-12">
+                                <div class="date">
+                                    <hr>
+                                    <span>Yesterday</span>
+                                    <hr>
+                                </div>
 
-                        <div class="message">
-                            <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                            <div class="text-main">
-                                <div class="text-group">
-                                    <div class="text">
-                                        <p>We've got some killer ideas kicking about already.</p>
+                                <div class="message">
+                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">
+                                    <div class="text-main">
+                                        <div class="text-group">
+                                            <div class="text">
+                                                <p>We've got some killer ideas kicking about already.</p>
+                                            </div>
+                                        </div>
+                                        <span>09:46 AM</span>
                                     </div>
                                 </div>
-                                <span>09:46 AM</span>
-                            </div>
-                        </div>
 
-                        <div class="message me">
-                            <div class="text-main">
-                                <div class="text-group me">
-                                    <div class="text me">
-                                        <p>Can't wait! How are we coming along with the client?</p>
+                                <div class="message me">
+                                    <div class="text-main">
+                                        <div class="text-group me">
+                                            <div class="text me">
+                                                <p>Can't wait! How are we coming along with the client?</p>
+                                            </div>
+                                        </div>
+                                        <span>11:32 AM</span>
                                     </div>
                                 </div>
-                                <span>11:32 AM</span>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                            <div class="text-main">
-                                <div class="text-group">
-                                    <div class="text">
-                                        <p>We've got some killer ideas kicking about already.</p>
+                                <div class="message">
+                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
+                                    <div class="text-main">
+                                        <div class="text-group">
+                                            <div class="text">
+                                                <p>We've got some killer ideas kicking about already.</p>
+                                            </div>
+                                        </div>
+                                        <span>09:46 AM</span>
                                     </div>
                                 </div>
-                                <span>09:46 AM</span>
-                            </div>
-                        </div>
 
-                        <div class="message me">
-                            <div class="text-main">
-                                <div class="text-group me">
-                                    <div class="text me">
-                                        <p>Can't wait! How are we coming along with the client?</p>
+                                <div class="message me">
+                                    <div class="text-main">
+                                        <div class="text-group me">
+                                            <div class="text me">
+                                                <p>Can't wait! How are we coming along with the client?</p>
+                                            </div>
+                                        </div>
+                                        <span>11:32 AM</span>
                                     </div>
                                 </div>
-                                <span>11:32 AM</span>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                            <div class="text-main">
-                                <div class="text-group">
-                                    <div class="text">
-                                        <p>We've got some killer ideas kicking about already.</p>
+                                <div class="message">
+                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
+                                    <div class="text-main">
+                                        <div class="text-group">
+                                            <div class="text">
+                                                <p>We've got some killer ideas kicking about already.</p>
+                                            </div>
+                                        </div>
+                                        <span>09:46 AM</span>
                                     </div>
                                 </div>
-                                <span>09:46 AM</span>
-                            </div>
-                        </div>
 
-                        <div class="message me">
-                            <div class="text-main">
-                                <div class="text-group me">
-                                    <div class="text me">
-                                        <p>Can't wait! How are we coming along with the client?</p>
+                                <div class="message me">
+                                    <div class="text-main">
+                                        <div class="text-group me">
+                                            <div class="text me">
+                                                <p>Can't wait! How are we coming along with the client?</p>
+                                            </div>
+                                        </div>
+                                        <span>11:32 AM</span>
                                     </div>
                                 </div>
-                                <span>11:32 AM</span>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                            <div class="text-main">
-                                <div class="text-group">
-                                    <div class="text">
-                                        <p>We've got some killer ideas kicking about already.</p>
+                                <div class="message">
+                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
+                                    <div class="text-main">
+                                        <div class="text-group">
+                                            <div class="text">
+                                                <p>We've got some killer ideas kicking about already.</p>
+                                            </div>
+                                        </div>
+                                        <span>09:46 AM</span>
                                     </div>
                                 </div>
-                                <span>09:46 AM</span>
-                            </div>
-                        </div>
 
-                        <div class="message me">
-                            <div class="text-main">
-                                <div class="text-group me">
-                                    <div class="text me">
-                                        <p>Can't wait! How are we coming along with the client?</p>
+                                <div class="message me">
+                                    <div class="text-main">
+                                        <div class="text-group me">
+                                            <div class="text me">
+                                                <p>Can't wait! How are we coming along with the client?</p>
+                                            </div>
+                                        </div>
+                                        <span>11:32 AM</span>
                                     </div>
                                 </div>
-                                <span>11:32 AM</span>
-                            </div>
-                        </div>
-                        <div class="message">
-                            <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                            <div class="text-main">
-                                <div class="text-group">
-                                    <div class="text">
-                                        <p>We've got some killer ideas kicking about already.</p>
+                                <div class="message">
+                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
+                                    <div class="text-main">
+                                        <div class="text-group">
+                                            <div class="text">
+                                                <p>We've got some killer ideas kicking about already.</p>
+                                            </div>
+                                        </div>
+                                        <span>09:46 AM</span>
                                     </div>
                                 </div>
-                                <span>09:46 AM</span>
-                            </div>
-                        </div>
 
-                        <div class="message me">
-                            <div class="text-main">
-                                <div class="text-group me">
-                                    <div class="text me">
-                                        <p>Can't wait! How are we coming along with the client?</p>
+                                <div class="message me">
+                                    <div class="text-main">
+                                        <div class="text-group me">
+                                            <div class="text me">
+                                                <p>Can't wait! How are we coming along with the client?</p>
+                                            </div>
+                                        </div>
+                                        <span>11:32 AM</span>
                                     </div>
                                 </div>
-                                <span>11:32 AM</span>
+
                             </div>
                         </div>
-
                     </div>
-                </div>
-            </div>
 
-            <div class="bottom">
-                <i class="fas fa-images"></i>
-                <i class="fas fa-smile"></i>
-                <div class="send-input w-100">
-                    <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
-                </div>
-                <div class="send" style="padding: 10px;">
-                    <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>
+                    <div class="bottom">
+                        <i class="fas fa-images"></i>
+                        <i class="fas fa-smile"></i>
+                        <div class="send-input w-100">
+                            <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
+                        </div>
+                        <div class="send" style="padding: 10px;">
+                            <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 <!--<div id="footer" align="center" th:replace="~{/fragments/app-fragments :: copyright}">-->
 <!--    Footer-->

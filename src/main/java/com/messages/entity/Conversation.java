@@ -10,8 +10,8 @@ import java.util.List;
 @Entity
 @Table(name = "conversations")
 @Data
-public class Conversation extends BaseEntity{
-
+public class Conversation extends BaseEntity
+{
     @ManyToOne
     @JoinColumn(name = "user1")
     private User user1;
