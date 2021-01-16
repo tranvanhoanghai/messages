@@ -11,8 +11,8 @@ public class Comment extends BaseEntity
     private User user_id;
 
     @ManyToOne
-    @JoinColumn(name = "blog_id")
-    private User blog_id;
+    @JoinColumn(name = "post_id")
+    private User post_id;
 
     @Column(nullable = false)
     private String content;

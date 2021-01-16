@@ -48,7 +48,7 @@ public class User extends BaseEntity{
     private List<Friend> friends2 = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private List<Blog> blogs = new ArrayList<>();
+    private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();

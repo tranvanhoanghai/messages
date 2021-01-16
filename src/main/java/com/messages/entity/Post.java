@@ -7,20 +7,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "blogs")
+@Table(name = "posts")
 @Data
-public class Blog extends BaseEntity
+public class Post extends BaseEntity
 {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user_id;
 
-    @OneToMany(mappedBy = "blog_id", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
 
     @Column(nullable = false)
     private String content_text_img;
     private String text;
-    @Column(length = 1)
+    @Column(length = 1, nullable = false)
     private Integer status;
 }
