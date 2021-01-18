@@ -1,3 +1,7 @@
+*{
+    margin:0;
+    padding:0;
+}
 a, img {
     -moz-transition: all .3s;
     -webkit-transition: all .3s
@@ -117,23 +121,7 @@ p {
 
 
 
-.material-icons {
-    font-family: 'Material Icons';
-    font-weight: 400;
-    font-style: normal;
-    font-size: 24px;
-    display: inline-block;
-    line-height: 1;
-    text-transform: none;
-    letter-spacing: normal;
-    word-wrap: normal;
-    white-space: nowrap;
-    direction: ltr;
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'liga'
-}
+
 
 .material-icons.md-18 {
     font-size: 18px

@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{layouts/main-layout :: main-fragment(
-                                                ~{:: title},
-                                                ~{:: #static-resources},
-                                                ~{:: #header},
-                                                ~{:: #main},
-                                                ~{:: #footer},
-                                                ~{:: #script}
-                                               )}">
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Sign-in</title>
+
     <th:block id="static-resources">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" th:href="@{css/auth.css}">
+        <link th:href="@{img/favicon.png}" type="image/png" rel="icon">
     </th:block>
 
 </head>
 <body>
 
-
-<div class="layout" id="main">
+<div class="layout">
     <!-- Start of Sign In -->
     <div class="main order-md-1">
         <div class="start">

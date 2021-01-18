@@ -3,6 +3,7 @@ package com.messages.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +23,15 @@ public class User extends BaseEntity
 
     @Column(nullable = false)
     private String fullName;
+
+    @Column(nullable = false, length = 1)
+    private Integer gender;
+
+    @Column(nullable = false)
+    private Date dateOfBirth;
+
+    @Column(nullable = false, unique = true, length = 100)
+    private String email;
 
     @Column(nullable = false, length = 1)
     private Integer isActive;

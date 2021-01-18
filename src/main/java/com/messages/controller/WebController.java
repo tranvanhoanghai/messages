@@ -33,8 +33,4 @@ public class WebController {
         return "about";
     }
 
-    @GetMapping("/hello")
-    public String hello() {
-        return "hello";
-    }
 }
