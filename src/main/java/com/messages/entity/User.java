@@ -29,22 +29,19 @@ public class User extends BaseEntity
     @Column
     private String rememberToken;
 
-    @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
-    private List<Conversation> conversations = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
-    private List<Conversation> conversations2 = new ArrayList<>();
-
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
     private List<Messengers> messengers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user_read", cascade = CascadeType.ALL)
+    private List<Messengers> messengers2 = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<GroupUser> groupUsers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "friend1", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "friend_send", cascade = CascadeType.ALL)
     private List<Friend> friends = new ArrayList<>();
 
-    @OneToMany(mappedBy = "friend2", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "friend_reply", cascade = CascadeType.ALL)
     private List<Friend> friends2 = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
@@ -52,5 +49,8 @@ public class User extends BaseEntity
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "group_user_send", cascade = CascadeType.ALL)
+    private List<GroupUser> groupUsers2 = new ArrayList<>();
 
 }

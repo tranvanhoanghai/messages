@@ -10,12 +10,12 @@ import javax.persistence.*;
 public class Friend extends BaseEntity
 {
     @ManyToOne
-    @JoinColumn(name = "friend1")
-    private User friend1;
+    @JoinColumn(name = "friend_send")
+    private User friend_send;
 
     @ManyToOne
-    @JoinColumn(name = "friend2")
-    private User friend2;
+    @JoinColumn(name = "friend_reply")
+    private User friend_reply;
 
     @Column(nullable = false, length = 1)
     private Integer status;

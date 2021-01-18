@@ -20,6 +20,6 @@ public class Group extends BaseEntity
     @OneToMany(mappedBy = "group_id", cascade = CascadeType.ALL)
     private List<GroupUser> groupUsers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "group_id" )
-    private List<Messengers> messengers = new ArrayList<>();
+    @OneToMany(mappedBy = "group_user_send" )
+    private List<MessGroup> messGroups = new ArrayList<>();
 }

@@ -6,17 +6,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "messengers")
+@Table(name = "mess_groups")
 @Data
-public class Messengers extends BaseEntity
+public class MessGroup extends BaseEntity
 {
     @ManyToOne
-    @JoinColumn(name = "user_send")
-    private User user_send;
-
-    @ManyToOne
-    @JoinColumn(name = "user_read")
-    private User user_read;
+    @JoinColumn(name = "group_user_send")
+    private Group group_user_send;
 
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
@@ -30,9 +26,6 @@ public class Messengers extends BaseEntity
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date timeRead;
 
-    @Column(nullable = false)
+    @Column
     private String content;
-
-    @Column(nullable = false, length = 1)
-    private Integer idRead;
 }
