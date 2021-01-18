@@ -16,10 +16,6 @@ public class GroupUser extends BaseEntity
     private Group group_id;
 
     @ManyToOne
-    @JoinColumn(name = "group_user_send")
-    private Group group_user_send;
-
-    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user_id;
 

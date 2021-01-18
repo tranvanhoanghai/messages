@@ -11,8 +11,12 @@ import java.util.Date;
 public class MessGroup extends BaseEntity
 {
     @ManyToOne
+    @JoinColumn(name = "group_id")
+    private Group group_id;
+
+    @ManyToOne
     @JoinColumn(name = "group_user_send")
-    private Group group_user_send;
+    private User group_user_send;
 
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)

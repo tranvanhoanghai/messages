@@ -51,6 +51,6 @@ public class User extends BaseEntity
     private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "group_user_send", cascade = CascadeType.ALL)
-    private List<GroupUser> groupUsers2 = new ArrayList<>();
+    private List<MessGroup> messGroups = new ArrayList<>();
 
 }
