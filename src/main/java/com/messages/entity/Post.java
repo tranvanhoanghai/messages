@@ -21,9 +21,6 @@ public class Post extends BaseEntity
     @Column(nullable = false)
     private String content_text_img;
 
-    @Column
-    private String text;
-
     @Column(length = 1, nullable = false)
     private Integer status;
 }

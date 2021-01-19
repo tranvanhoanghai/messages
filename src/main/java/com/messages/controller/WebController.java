@@ -13,6 +13,11 @@ public class WebController {
         return "chat";
     }
 
+    @GetMapping("/login")
+    public String getLogin() {
+        return "login";
+    }
+
     @GetMapping("/sign-in")
     public String sign() {
         return "sign-in";

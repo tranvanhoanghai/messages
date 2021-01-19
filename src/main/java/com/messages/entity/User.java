@@ -1,21 +1,28 @@
 package com.messages.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User extends BaseEntity
 {
     @Column
     private String userImg;
 
-    @Column(name = "username",length = 100, nullable = false, unique = true)
+    @Column(length = 100, nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
@@ -38,6 +45,14 @@ public class User extends BaseEntity
 
     @Column
     private String rememberToken;
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
     private List<Messengers> messengers = new ArrayList<>();
@@ -62,5 +77,11 @@ public class User extends BaseEntity
 
     @OneToMany(mappedBy = "group_user_send", cascade = CascadeType.ALL)
     private List<MessGroup> messGroups = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
+    private List<Conversations> conversations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
+    private List<Conversations> conversations2 = new ArrayList<>();
 
 }

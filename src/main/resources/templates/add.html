@@ -24,14 +24,11 @@
 <div id="main" class="container">
     <h2>Add Employee</h2>
     <form action="#" th:action="@{/employee}" th:object="${employee}" method="POST">
-        <input type="text" th:field="*{firstName}"
-               placeholder="Employee First Name" class="form-control mb-4 col-4" autocomplete="off">
+        <input type="text" th:field="*{firstName}" placeholder="Employee First Name" class="form-control mb-4 col-4" autocomplete="off">
 
-        <input type="text" th:field="*{lastName}"
-               placeholder="Employee Last Name" class="form-control mb-4 col-4" autocomplete="off">
+        <input type="text" th:field="*{lastName}" placeholder="Employee Last Name" class="form-control mb-4 col-4" autocomplete="off">
 
-        <input type="text" th:field="*{email}"
-               placeholder="Employee Email" class="form-control mb-4 col-4" autocomplete="off">
+        <input type="text" th:field="*{email}" placeholder="Employee Email" class="form-control mb-4 col-4" autocomplete="off">
 
         <button type="submit" class="btn btn-info col-2"> Save Employee</button>
     </form>

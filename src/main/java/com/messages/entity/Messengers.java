@@ -18,6 +18,10 @@ public class Messengers extends BaseEntity
     @JoinColumn(name = "user_read")
     private User user_read;
 
+    @ManyToOne
+    @JoinColumn(name = "cvt_id")
+    private Conversations cvt_id;
+
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date startTime;
