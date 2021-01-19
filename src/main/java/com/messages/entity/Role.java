@@ -10,9 +10,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "roles")
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Role extends BaseEntity {
@@ -22,4 +20,9 @@ public class Role extends BaseEntity {
 
     @ManyToMany(mappedBy = "roles")
     private Set<User> users;
+
+    public Role(String name) {
+        super();
+        this.name = name;
+    }
 }

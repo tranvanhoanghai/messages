@@ -8,15 +8,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class WebController {
 
-    @GetMapping("/")
-    public String home() {
-        return "chat";
-    }
-
     @GetMapping("/login")
     public String getLogin() {
         return "login";
     }
+
+    @GetMapping("/chat")
+    public String home() {
+        return "index";
+    }
+
+
 
     @GetMapping("/sign-in")
     public String sign() {

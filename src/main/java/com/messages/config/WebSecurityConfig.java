@@ -1,8 +1,10 @@
 package com.messages.config;
 
+import com.messages.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,45 +12,69 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserDetailsService userDetailsService;
+    private IUserService iUserService;
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-//    @Autowired
-//    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-//        // Sét đặt dịch vụ để tìm kiếm User trong Database.
-//        // Và sét đặt PasswordEncoder.
-//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-//    }
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider auth = new DaoAuthenticationProvider();
+        auth.setUserDetailsService(iUserService);
+        auth.setPasswordEncoder(passwordEncoder());
+        return auth;
+    }
 
-    @Override
+        @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
 //                .antMatchers("/login").permitAll()      // không check authen trên link "login"
-                .antMatchers("/register").permitAll()
+                .antMatchers(
+                        "/registration**",
+                        "/js/**",
+                        "/css/**",
+                        "/img/**").permitAll()
+
                 .antMatchers("/").hasRole("MEMBER")     // chỉ cho phép các user có GrantedAuthority là ROLE_roleName mới được phép truy cập
                 .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().authenticated()                       // check authen trên tất cả các link khác
                 .and()
-            .formLogin()                                            // sử dụng formlogin
-                .loginPage("/login")                                // page login được generate thông qua controller xử lý "/login"
+            .formLogin()
+                .loginPage("/login")
                 .permitAll()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/")
-                .failureUrl("/login?error")
+                .defaultSuccessUrl("/chat")
                 .and()
-            .exceptionHandling()
-                .accessDeniedPage("/403");
+                .logout()
+                .invalidateHttpSession(true)
+                .clearAuthentication(true)
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login?logout")
+                .permitAll();
+
+
+
+
+
+
+//            .formLogin()                                            // sử dụng formlogin
+//                .loginPage("/login")                                // page login được generate thông qua controller xử lý "/login"
+//                .permitAll()
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .defaultSuccessUrl("/")
+//                .failureUrl("/login?error")
+//                .and()
+//            .exceptionHandling()
+//                .accessDeniedPage("/403");
     }
 }

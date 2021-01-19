@@ -6,15 +6,11 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
-@Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity
@@ -31,28 +27,28 @@ public class User extends BaseEntity
     @Column(nullable = false)
     private String fullName;
 
-    @Column(nullable = false, length = 1)
-    private Integer gender;
+    @Column(nullable = true, length = 1)
+    private String gender;
 
-    @Column(nullable = false)
+    @Column()
     private Date dateOfBirth;
 
-    @Column(nullable = false, unique = true, length = 100)
+    @Column(nullable = true, unique = true, length = 100)
     private String email;
 
-    @Column(nullable = false, length = 1)
-    private Integer isActive;
+    @Column(nullable = true, length = 1)
+    private String isActive;
 
     @Column
     private String rememberToken;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
     private List<Messengers> messengers = new ArrayList<>();
@@ -83,5 +79,15 @@ public class User extends BaseEntity
 
     @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
     private List<Conversations> conversations2 = new ArrayList<>();
+
+
+    public User(String username, String fullName, String email, String password) {
+        super();
+        this.username = username;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+    }
+
 
 }
