@@ -10,25 +10,19 @@ public class WebController {
 
     @GetMapping("/login")
     public String getLogin() {
-        return "login";
+        return "sign-in";
     }
 
     @GetMapping("/chat")
     public String home() {
-        return "index";
+        return "chat";
     }
 
-
-
-    @GetMapping("/sign-in")
-    public String sign() {
-        return "sign-in";
+    @GetMapping("/")
+    public String getHome() {
+        return "home";
     }
 
-    @GetMapping("/sign-up")
-    public String signUp() {
-        return "sign-up";
-    }
 
     @GetMapping("/products")
     public String products() {

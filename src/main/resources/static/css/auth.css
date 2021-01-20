@@ -67,7 +67,9 @@ p {
 .container-fluid {
     padding:0;
 }
-
+.errors{
+    color:red;
+}
 .form-control {
     padding: 25px 15px;
     background: #f5f5f5;
@@ -75,7 +77,6 @@ p {
     border-radius: 6px;
     border: none;
     font-size: 16px;
-    color: #bdbac2!important
 }
 
 .form-control:focus {

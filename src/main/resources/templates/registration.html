@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <title>Registration</title>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -43,28 +43,37 @@
             <h1>Registration</h1>
 
             <form th:action="@{/registration}" method="post" th:object="${user}">
+<!--                <div style="color: red;" th:if="${#fields.hasErrors('*')}">-->
+<!--                    <p><strong>Errors</strong></p>-->
+<!--                    <ul>-->
+<!--                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>-->
+<!--                    </ul>-->
+<!--                </div>-->
+
                 <div class="form-group">
-                    <label class="control-label" for="firstName"> First Name </label>
+                    <label class="control-label" for="firstName"> Username </label>
                     <input id="firstName" class="form-control" th:field="*{username}"
-                           required autofocus="autofocus" />
+                            autofocus="autofocus" autocomplete="off"/>
+                    <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name
+
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="lastName"> Last Name </label> <input
+                    <label class="control-label" for="lastName">Full name </label> <input
                         id="lastName" class="form-control" th:field="*{fullName}"
-                        required autofocus="autofocus" />
+                         autofocus="autofocus"  autocomplete="off" />
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="email"> Email </label> <input
-                        id="email" class="form-control" th:field="*{email}" required
+                        id="email" class="form-control" th:field="*{email}"
                         autofocus="autofocus" />
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="password"> Password </label> <input
                         id="password" class="form-control" type="password"
-                        th:field="*{password}" required autofocus="autofocus" />
+                        th:field="*{password}"  autofocus="autofocus" />
                 </div>
 
                 <div class="form-group">

@@ -22,31 +22,43 @@
                     <div class="col-md-12">
                         <div class="content">
                             <h1>Create Account</h1>
-                            <form class="signup">
+                            <div th:if="${param.success}">
+                                <div class="alert alert-info">You've successfully registered
+                                    to our awesome app!</div>
+                            </div>
+                            <form class="signup" th:action="@{/sign-up}" method="post" th:object="${user}">
+
+                                <span class="errors" th:text="${vc}"></span>
+
                                 <div class="form-group">
-                                    <input type="text" id="inputFullName" class="form-control"
-                                           placeholder="Full Name" required>
+                                    <input type="text" th:field="*{username}" id="inputFullName" class="form-control"
+                                           placeholder="User Name"  autofocus="autofocus" autocomplete="off"  required/>
+                                    <span class="errors" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" id="inputName" class="form-control"
-                                           placeholder="User Name" required>
+                                    <input type="text" th:field="*{fullName}" id="inputName" class="form-control"
+                                           placeholder="Full Name"  autocomplete="off" required>
+                                    <span class="errors" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" id="inputPassword" class="form-control"
-                                           placeholder="Password" required>
+                                    <input type="email" th:field="*{email}" class="form-control"
+                                           placeholder="Email"  autocomplete="off" required>
+                                    <span class="errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" id="inputConfirmPassword" class="form-control"
-                                           placeholder="Confirm Password" required>
+                                    <input type="password" th:field="*{password}" class="form-control"
+                                           placeholder="Password"  autocomplete="off" required>
+                                    <span class="errors" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
                                 </div>
 
-                                <button type="submit" class="btn button" formaction="index-2.html">Sign
-                                    Up</button>
+                                <button type="submit" class="btn button">Sign Up</button>
+
                                 <div class="callout">
-                                    <span>Already a member? <a th:href="@{sign-in}">Sign In</a></span>
+                                    <span>Already a member? <a th:href="@{/login}">Sign In</a></span>
                                 </div>
+
                             </form>
                         </div>
                     </div>

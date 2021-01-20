@@ -3,14 +3,17 @@ package com.messages.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class User extends BaseEntity
@@ -19,24 +22,29 @@ public class User extends BaseEntity
     private String userImg;
 
     @Column(length = 100, nullable = false, unique = true)
+    @NotBlank(message = "username cannot be null")
     private String username;
 
     @Column(nullable = false)
-    private String password;
-
-    @Column(nullable = false)
+    @NotBlank(message = "fullname cannot be null")
     private String fullName;
 
-    @Column(nullable = true, length = 1)
+    @Column(nullable = false)
+    @NotBlank(message = "password cannot be null")
+    private String password;
+
+    @Column(nullable = false, unique = true, length = 100)
+    @NotBlank(message = "email không dc trong")
+    @Email(message = "phải là email")
+    private String email;
+
+    @Column(length = 1)
     private String gender;
 
     @Column()
     private Date dateOfBirth;
 
-    @Column(nullable = true, unique = true, length = 100)
-    private String email;
-
-    @Column(nullable = true, length = 1)
+    @Column(length = 1)
     private String isActive;
 
     @Column
@@ -80,7 +88,6 @@ public class User extends BaseEntity
     @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
     private List<Conversations> conversations2 = new ArrayList<>();
 
-
     public User(String username, String fullName, String email, String password) {
         super();
         this.username = username;
@@ -88,6 +95,4 @@ public class User extends BaseEntity
         this.email = email;
         this.password = password;
     }
-
-
 }

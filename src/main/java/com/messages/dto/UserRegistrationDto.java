@@ -1,11 +1,15 @@
 package com.messages.dto;
 
+import com.messages.entity.User;
 import lombok.Data;
 
-@Data
-public class UserRegistrationDto {
-    private String username;
-    private String fullName;
-    private String password;
-    private String email;
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+
+//@Data
+public class UserRegistrationDto extends User {
+//    private String username;
+//    private String fullName;
+//    private String password;
+//    private String email;
 }
