@@ -15,7 +15,8 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/sign-up")
-public class UserRegistrationController {
+public class UserRegistrationController
+{
     @Autowired
     private IUserService iUserService;
 

@@ -9,7 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "conversations")
 @Data
-public class Conversations extends BaseEntity{
+public class Conversations extends BaseEntity
+{
 
     @ManyToOne
     @JoinColumn(name = "user1")
