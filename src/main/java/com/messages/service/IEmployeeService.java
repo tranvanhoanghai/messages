@@ -4,9 +4,15 @@ import com.messages.entity.Employee;
 
 import java.util.List;
 
-public interface IEmployeeService {
+public interface IEmployeeService
+{
+    List<Employee> searchEmployee(String term);
+
     List<Employee> getAllEmployee();
-    void saveEmp(Employee employee);
+
     Employee getEmployeeById(long id);
-    void delteEmpById(long id);
+
+    void saveEmp(Employee employee);
+
+    void deleteEmpById(long id);
 }

@@ -19,6 +19,11 @@ public class EmployeeService implements IEmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Override
+    public List<Employee> searchEmployee(String term) {
+        return employeeRepository.findByFirstName(term);
+    }
+
+    @Override
     public List<Employee> getAllEmployee() {
         return employeeRepository.findAll();
     }
@@ -41,7 +46,7 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public void delteEmpById(long id) {
+    public void deleteEmpById(long id) {
         this.employeeRepository.deleteById(id);
     }
 }

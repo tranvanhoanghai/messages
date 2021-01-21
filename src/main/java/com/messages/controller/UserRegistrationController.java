@@ -41,13 +41,10 @@ public class UserRegistrationController {
         }
         try {
             iUserService.save(userRegistrationDto);
-
         }catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             model.addAttribute("vc", "username or email is exist");
-
             return "sign-up";
-
         }
         return "redirect:/sign-up?success";
     }
