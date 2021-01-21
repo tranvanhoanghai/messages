@@ -1,12 +1,21 @@
 package com.messages.controller;
 
-import com.messages.entity.User;
+
+import com.messages.service.IUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+import java.util.Map;
+
+
 @Controller
 public class WebController {
+
+    @Autowired
+    private IUserService iUserService;
 
     @GetMapping("/login")
     public String getLogin() {
@@ -14,24 +23,16 @@ public class WebController {
     }
 
     @GetMapping("/chat")
-    public String home() {
+    public String homeChat(Model model, Principal principal) {
+        model.addAttribute("list",iUserService.getlistExceptUserChat(principal.getName()));
         return "chat";
     }
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String getHome() {
-        return "home";
+        return "index";
     }
 
 
-    @GetMapping("/products")
-    public String products() {
-        return "products";
-    }
-
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
 
 }

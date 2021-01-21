@@ -16,6 +16,7 @@ body {
     --input-bg:#f4f4f4;                 /*  background input */
     --text-color-black:#000;
     --border-line:#ecf0f5;
+    --border-img:#2196f3;
 
     /* Vẫn giữ không thay đổi */
     --text-color-white:#fff;
@@ -33,6 +34,7 @@ body.dark {
     --input-bg:#3a3b3c;                  /*  background input */
     --text-color-black:#fff;
     --border-line:#393a3b;
+    --border-img:#fff;
 
     /* Vẫn giữ không thay đổi */
     --text-color-white:#fff;
@@ -186,7 +188,7 @@ main .sidebar .content .member a {
     height: 55px;
     min-width: 55px;
     max-width: 55px;
-    border: 2px solid #fff;
+    border: 2px solid var(--border-img);
     border-radius: 100%;
     margin-right: 15px;
 }

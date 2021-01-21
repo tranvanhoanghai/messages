@@ -1,6 +1,7 @@
 package com.messages.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -26,7 +27,7 @@ public class User extends BaseEntity
     private String username;
 
     @Column(nullable = false)
-    @NotBlank(message = "fullname cannot be null")
+    @NotBlank(message = "Full name cannot be null")
     private String fullName;
 
     @Column(nullable = false)
@@ -34,7 +35,7 @@ public class User extends BaseEntity
     private String password;
 
     @Column(nullable = false, unique = true, length = 100)
-    @NotBlank(message = "email không dc trong")
+    @NotBlank(message = "email cannot be null")
     @Email(message = "phải là email")
     private String email;
 
@@ -94,5 +95,8 @@ public class User extends BaseEntity
         this.fullName = fullName;
         this.email = email;
         this.password = password;
+    }
+
+    public User(String username, String fullName, String email, String userImg, String isActive, Integer id, Date dateOfBirth, String gender, String password, List<GrantedAuthority> grantedAuthorities) {
     }
 }

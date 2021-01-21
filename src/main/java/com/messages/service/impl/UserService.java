@@ -28,14 +28,14 @@ public class UserService implements IUserService {
         this.userRepository = userRepository;
     }
 
-    @Override
+    @Override // Lưu thông tin đăng kí
     public User save(UserRegistrationDto userRegistrationDto) {
         User user = new User(userRegistrationDto.getUsername(),userRegistrationDto.getFullName(), userRegistrationDto.getEmail(),
                 passwordEncoder.encode(userRegistrationDto.getPassword()));
         return userRepository.save(user);
     }
 
-    @Override
+    @Override // Cấu hình đăng nhập
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user == null) {
@@ -49,7 +49,12 @@ public class UserService implements IUserService {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getFullName(), user.getPassword(),grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+    }
+
+    @Override
+    public List<User> getlistExceptUserChat(String exceptUsername) {
+        return userRepository.listExceptUserChat(exceptUsername);
     }
 
 
@@ -61,8 +66,6 @@ public class UserService implements IUserService {
 
 
 
-//    mapRolesToAuthorities(user.getRoles())
-//    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles){
-//        return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
-//    }
+
+
 }
