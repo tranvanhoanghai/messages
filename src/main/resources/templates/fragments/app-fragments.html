@@ -6,16 +6,15 @@
 </head>
 <body>
 
-
 <!-- Default Header -->
 <!--th:fragment="nav-default"-->
 <nav class="container menu" th:fragment="nav-default">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link active" href="index.html"><i class="far fa-comment"></i></a>
+            <a class="nav-link active" href="@{/chat.html}"><i class="far fa-comment"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="home.html"><i class="fas fa-home"></i></a>
+            <a class="nav-link" href="@{/home.html}"><i class="fas fa-home"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
@@ -37,7 +36,7 @@
                 </a>
                 <ul class="dropdown-menu" style="z-index: 9;">
                     <li>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item" th:href="@{/profile}">
                             <i class="far fa-user"></i>
                             <span>Profile</span>
                         </a>

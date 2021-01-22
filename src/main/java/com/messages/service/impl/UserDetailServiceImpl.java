@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserDetailServiceImpl implements UserDetails { // Custom get user detail
 
-    private User user;
+    User user;
 
     public UserDetailServiceImpl(User user) {
         this.user = user;
@@ -45,6 +45,10 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
 
     public String getGender() {
         return user.getGender();
+    }
+
+    public java.util.Date getCreatedAt() {
+        return  user.getCreatedAt();
     }
 
 

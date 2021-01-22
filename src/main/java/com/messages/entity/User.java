@@ -1,8 +1,6 @@
 package com.messages.entity;
 
 import lombok.*;
-import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -58,7 +56,7 @@ public class User extends BaseEntity
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private List<Role> roles;
+    private List<Role> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
     private List<Messengers> messengers = new ArrayList<>();

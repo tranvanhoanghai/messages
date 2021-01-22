@@ -1,8 +1,8 @@
 package com.messages.entity;
 
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -21,14 +21,14 @@ public abstract class BaseEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @CreatedDate
+    @Column(updatable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date createdAt = new Date();
 
     @Column
-    @Temporal(value = TemporalType.TIMESTAMP)
-    @LastModifiedDate
+    @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date updatedAt = new Date();
 
 }
