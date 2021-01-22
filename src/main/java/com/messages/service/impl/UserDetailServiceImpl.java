@@ -10,7 +10,6 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 public class UserDetailServiceImpl implements UserDetails { // Custom get user detail
 
@@ -53,7 +52,7 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        Set<Role> roles = user.getRoles();
+        List<Role> roles = user.getRoles();
         for (Role role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }

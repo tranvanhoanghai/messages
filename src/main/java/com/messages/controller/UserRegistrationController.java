@@ -25,14 +25,14 @@ public class UserRegistrationController
     @GetMapping
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
-        return "sign-up";
+        return "auth/sign-up";
     }
 
     @PostMapping
     public String registerUserAccount(Model model, @Valid @ModelAttribute("user") User user, BindingResult errors)
     {
         if (errors.hasErrors()){
-            return "sign-up";
+            return "auth/sign-up";
         }
 
         try {
@@ -43,7 +43,7 @@ public class UserRegistrationController
             userService.saveReg(user);
         }catch (Exception e){
             model.addAttribute("isExist", "username or email is exist");
-            return "sign-up";
+            return "auth/sign-up";
         }
 
         return "redirect:/sign-up?success";

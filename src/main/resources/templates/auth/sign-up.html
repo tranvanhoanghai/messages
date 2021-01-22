@@ -22,12 +22,18 @@
                     <div class="col-md-12">
                         <div class="content">
                             <h1>Create Account</h1>
-                            <div th:if="${param.success}">
-                                <div class="alert alert-info">You've successfully registered
-                                    to our awesome app!</div>
-                            </div>
                             <form class="signup" th:action="@{/sign-up}" method="post" th:object="${user}">
 
+                                <div th:if="${param.success}">
+                                    <div class="alert alert-info">You've successfully registered
+                                        to our awesome app!</div>
+                                </div>
+            <!--                <div style="color: red;" th:if="${#fields.hasErrors('*')}">-->
+            <!--                    <p><strong>Errors</strong></p>-->
+            <!--                    <ul>-->
+            <!--                        <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>-->
+            <!--                    </ul>-->
+            <!--                </div>-->
                                 <span class="errors" th:text="${isExist}"></span>
 
                                 <div class="form-group">
@@ -74,7 +80,7 @@
                         <h2>Welcome Back!</h2>
                         <p>To keep connected with your friends please login with your personal
                             info.</p>
-                        <a th:href="@{sign-in}" class="btn button">Sign In</a>
+                        <a th:href="@{/login}" class="btn button">Sign In</a>
                     </div>
                 </div>
             </div>

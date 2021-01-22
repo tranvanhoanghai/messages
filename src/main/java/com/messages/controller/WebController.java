@@ -26,9 +26,9 @@ public class WebController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         // Nếu chưa login thì chuyển về trang login
         if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
-            return "sign-in";
+            return "auth/sign-in";
         }
-        return "redirect:/";
+        return "redirect:/chat";
     }
 
     @GetMapping("/chat")

@@ -1,6 +1,9 @@
 package com.messages.entity;
 
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -11,7 +14,8 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BaseEntity
+@EntityListeners(AuditingEntityListener.class)
+public abstract class BaseEntity
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,10 +23,12 @@ public class BaseEntity
 
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date createdAt;
+    @CreatedDate
+    private Date createdAt = new Date();
 
     @Column
     @Temporal(value = TemporalType.TIMESTAMP)
-    private Date updatedAt;
+    @LastModifiedDate
+    private Date updatedAt = new Date();
 
 }
