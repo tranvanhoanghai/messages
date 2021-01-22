@@ -5,7 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "friends")
+@Table(name = "friend")
 @Data
 public class Friend extends BaseEntity
 {

@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "mess_groups")
+@Table(name = "mess_group")
 @Data
 public class MessGroup extends BaseEntity
 {

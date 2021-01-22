@@ -6,17 +6,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "messengers")
+@Table(name = "messenger")
 @Data
 public class Messengers extends BaseEntity
 {
     @ManyToOne
     @JoinColumn(name = "user_send")
     private User user_send;
-
-    @ManyToOne
-    @JoinColumn(name = "user_read")
-    private User user_read;
 
     @ManyToOne
     @JoinColumn(name = "cvt_id")

@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "groupUsers")
+@Table(name = "groupUser")
 @Data
 public class GroupUser extends BaseEntity
 {

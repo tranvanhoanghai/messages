@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService
 {
-    void saveReg(User user); // đăng kí
+    void saveReg(User user); // Tạo phương thức đăng kí
 
     List<User> getlistExceptUserChat(Integer exceptUsername); // get user chat trừ user login
 }

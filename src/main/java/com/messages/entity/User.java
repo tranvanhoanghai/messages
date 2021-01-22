@@ -9,10 +9,11 @@ import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "users")
+@Table(name = "user")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -53,26 +54,23 @@ public class User extends BaseEntity
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_roles",
+            name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private List<Role> roles;
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
     private List<Messengers> messengers = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user_read", cascade = CascadeType.ALL)
-    private List<Messengers> messengers2 = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<GroupUser> groupUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "friend_send", cascade = CascadeType.ALL)
-    private List<Friend> friends = new ArrayList<>();
+    private List<Friend> friend_send = new ArrayList<>();
 
     @OneToMany(mappedBy = "friend_reply", cascade = CascadeType.ALL)
-    private List<Friend> friends2 = new ArrayList<>();
+    private List<Friend> friend_reply = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
     private List<Post> posts = new ArrayList<>();
@@ -88,15 +86,5 @@ public class User extends BaseEntity
 
     @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
     private List<Conversations> conversations2 = new ArrayList<>();
-
-
-
-//    public User(String username, String fullName, String email, String password) {
-//        super();
-//        this.username = username;
-//        this.fullName = fullName;
-//        this.email = email;
-//        this.password = password;
-//    }
 
 }
