@@ -6,16 +6,21 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class UserDetailService implements UserDetails {
+public class UserDetailServiceImpl implements UserDetails { // Custom get user detail
 
     private User user;
 
-    public UserDetailService(User user) {
+    public UserDetailServiceImpl(User user) {
         this.user = user;
+    }
+
+    public Integer getId() {
+        return user.getId();
     }
 
     public String getFullName() {
@@ -25,6 +30,23 @@ public class UserDetailService implements UserDetails {
     public String getUserImg() {
         return user.getUserImg();
     }
+
+    public String getEmail() {
+        return user.getEmail();
+    }
+
+    public Date getDateOfBirth() {
+        return user.getDateOfBirth();
+    }
+
+    public String getIsActive() {
+        return user.getIsActive();
+    }
+
+    public String getGender() {
+        return user.getGender();
+    }
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

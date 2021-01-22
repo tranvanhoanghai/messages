@@ -4,7 +4,7 @@ import com.messages.entity.Employee;
 
 import java.util.List;
 
-public interface IEmployeeService
+public interface EmployeeService
 {
     List<Employee> searchEmployee(String term);
 

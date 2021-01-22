@@ -12,6 +12,6 @@ public interface UserRepository extends JpaRepository<User, Integer>
 {
     User findByUsername(String username);
 
-    @Query("SELECT u FROM User u WHERE NOT u.username=?1")
-    List<User> listExceptUserChat (String exceptUsername);
+    @Query("SELECT u FROM User u WHERE NOT u.id=?1")
+    List<User> listExceptUserChat (Integer exceptUsername);
 }

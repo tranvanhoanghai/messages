@@ -2,13 +2,12 @@ package com.messages.service.impl;
 
 import com.messages.entity.Conversations;
 import com.messages.repository.ConversationRepository;
-import com.messages.repository.UserRepository;
-import com.messages.service.IConversationService;
+import com.messages.service.ConversationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ConversationService implements IConversationService
+public class ConversationServiceImpl implements ConversationService
 {
     @Autowired //inject bean
     private ConversationRepository conversationRepository;

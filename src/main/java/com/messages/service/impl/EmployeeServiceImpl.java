@@ -2,18 +2,14 @@ package com.messages.service.impl;
 
 import com.messages.entity.Employee;
 import com.messages.repository.EmployeeRepository;
-import com.messages.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService implements IEmployeeService {
+public class EmployeeServiceImpl implements com.messages.service.EmployeeService {
 
     @Autowired
     private EmployeeRepository employeeRepository;

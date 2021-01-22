@@ -175,12 +175,15 @@ main .sidebar .content .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
 
 main .sidebar .content .member {
     position: relative;
+    padding: 20px 0;
 }
 
 main .sidebar .content .member a {
     color: black;
     display: flex;
     align-items: flex-start;
+    height: 70px;
+    overflow: hidden;
 }
 
 .avatar-img {

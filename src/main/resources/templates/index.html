@@ -55,12 +55,17 @@
 <div class="container" style="margin-top:100px">
     Welcome <span sec:authentication="principal.username"> User</span><br>
             <span sec:authentication="name"></span><br>
-<!--            <span>[[${#request.remoteUser}]]</span><br>-->
-<!--    <b>[[${#request.userPrincipal.principal.username}]]</b>-->
-    <span sec:authentication="principal.fullName">Fullname</span><br>
-    <span sec:authentication="principal.userImg">Fullname</span><br>
+
+    <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+    <b>[[${#request.userPrincipal.principal.userImg}]]</b>
+    <span sec:authentication="principal.fullName"></span><br>
+    <span sec:authentication="principal.userImg"></span><br>
+    <span sec:authentication="principal.isActive"></span><br>
+    <span sec:authentication="principal.dateOfBirth"></span><br>
+    <span sec:authentication="principal.gender"></span><br>
+    <span sec:authentication="principal.email"></span><br>
+    <span sec:authentication="principal.id"></span><br>
     Roles: <span sec:authentication="principal.authorities"></span><br>
-<!--    <span th:text="${#request.userPrincipal.principal.age}"> </span>-->
 </div>
 </body>
 </html>

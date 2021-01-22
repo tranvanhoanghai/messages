@@ -26,7 +26,7 @@
         <li class="nav-item">
             <div class="dropdown d-inline">
                 <a class="nav-link" href="#" data-bs-toggle="dropdown">
-                    <img class="avatar" src="img/avatars/avatar-female-6.jpg" alt="">
+                    <img class="avatar" th:src="@{'img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="">
                 </a>
                 <ul class="dropdown-menu" style="z-index: 9;">
                     <li>

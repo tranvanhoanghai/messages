@@ -2,7 +2,6 @@ package com.messages.service.impl;
 
 import com.messages.entity.User;
 import com.messages.repository.UserRepository;
-import com.messages.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class UserService implements IUserService {
+public class UserServiceImpl implements com.messages.service.UserService {
 
     @Autowired //inject bean
     private UserRepository userRepository;
@@ -22,36 +21,17 @@ public class UserService implements IUserService {
     }
 
 
-
-
     @Override // Cấu hình đăng nhập
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if(user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
-
-//        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-//
-//        List<Role> roles = user.getRoles();
-//        for (Role role : roles) {
-//            grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
-//        }
-
-//        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
-        return new UserDetailService(user);
+        return new UserDetailServiceImpl(user);
     }
 
     @Override // get user chat trừ user login
-    public List<User> getlistExceptUserChat(String exceptUsername) {
+    public List<User> getlistExceptUserChat(Integer exceptUsername) {
         return userRepository.listExceptUserChat(exceptUsername);
     }
-
-
-//    @Override
-//    public void saveReg(User user) {
-//        new User(user.getUsername(),user.getFullName(), user.getEmail(),
-//                passwordEncoder.encode(user.getPassword()));
-//        userRepository.save(user);
-//    }
 }
