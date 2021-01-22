@@ -89,14 +89,14 @@ public class User extends BaseEntity
     @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
     private List<Conversations> conversations2 = new ArrayList<>();
 
-    public User(String username, String fullName, String email, String password) {
-        super();
-        this.username = username;
-        this.fullName = fullName;
-        this.email = email;
-        this.password = password;
-    }
 
-    public User(String username, String fullName, String email, String userImg, String isActive, Integer id, Date dateOfBirth, String gender, String password, List<GrantedAuthority> grantedAuthorities) {
-    }
+
+//    public User(String username, String fullName, String email, String password) {
+//        super();
+//        this.username = username;
+//        this.fullName = fullName;
+//        this.email = email;
+//        this.password = password;
+//    }
+
 }

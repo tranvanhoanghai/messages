@@ -1,11 +1,14 @@
 package com.messages.controller;
 
-import com.messages.dto.UserRegistrationDto;
+import com.messages.entity.User;
+import com.messages.repository.UserRepository;
 import com.messages.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,33 +23,34 @@ public class UserRegistrationController
     @Autowired
     private IUserService iUserService;
 
-//    public UserRegistrationController(IUserService iUserService){
-//        super();
-//        this.iUserService=iUserService;
-//    }
-
-    @ModelAttribute("user")
-    public UserRegistrationDto userRegistrationDto() {
-        return new UserRegistrationDto();
-    }
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping
-    public String showRegistrationForm() {
+    public String showRegistrationForm(Model model) {
+        model.addAttribute("user", new User());
         return "sign-up";
     }
 
     @PostMapping
-    public String registerUserAccount(@Valid @ModelAttribute("user") UserRegistrationDto userRegistrationDto, Model model, Errors errors) {
+    public String registerUserAccount(@Valid @ModelAttribute("user") User user, Model model, BindingResult errors) {
         if (errors.hasErrors()){
             return "sign-up";
         }
-        try {
-            iUserService.save(userRegistrationDto);
-        }catch (Exception e){
-            //e.printStackTrace();
-            model.addAttribute("vc", "username or email is exist");
-            return "sign-up";
-        }
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+
+        iUserService.saveReg(user);
+
+//        try {
+//            iUserService.saveReg(user);
+//        }catch (Exception e){
+//            model.addAttribute("isExist", "username or email is exist");
+//            return "sign-up";
+//        }
+
         return "redirect:/sign-up?success";
     }
 }
