@@ -31,12 +31,6 @@ public class WebController {
         return "redirect:/chat";
     }
 
-    @GetMapping("/chat")
-    public String homeChat(@AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, Model model, Principal principal) {
-        model.addAttribute("list",iUserService.getlistExceptUserChat(userDetailServiceImpl.getId()));
-        return "chat";
-    }
-
     @GetMapping("/index")
     public String getHome() {
         return "index";

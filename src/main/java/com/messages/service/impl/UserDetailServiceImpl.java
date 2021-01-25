@@ -24,7 +24,7 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
     }
 
     public String getFullName() {
-        return user.getFullName();
+        return user.getFirstName() + user.getLastName();
     }
 
     public String getUserImg() {
@@ -39,9 +39,9 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
         return user.getDateOfBirth();
     }
 
-    public String getIsActive() {
-        return user.getIsActive();
-    }
+//    public String getIsActive() {
+//        return user.getIsActive();
+//    }
 
     public String getGender() {
         return user.getGender();

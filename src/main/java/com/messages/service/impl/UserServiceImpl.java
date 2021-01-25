@@ -30,8 +30,13 @@ public class UserServiceImpl implements com.messages.service.UserService {
         return new UserDetailServiceImpl(user);
     }
 
-    @Override // get user chat trừ user login
-    public List<User> getlistExceptUserChat(Integer exceptUsername) {
+    @Override // lấy user nằm trong list bạn bè ngoại trừ user login
+    public List<User> getListExceptUserChat(Integer exceptUsername) {
         return userRepository.listExceptUserChat(exceptUsername);
+    }
+
+    @Override
+    public List<User> searchUser(String key) {
+        return userRepository.findByFirstName(key);
     }
 }

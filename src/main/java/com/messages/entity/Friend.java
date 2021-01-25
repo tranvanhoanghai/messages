@@ -9,14 +9,14 @@ import javax.persistence.*;
 @Data
 public class Friend extends BaseEntity
 {
-    @ManyToOne
-    @JoinColumn(name = "friend_send")
-    private User friend_send;
+    @Column(nullable = false, length = 1)
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "friend_reply")
     private User friend_reply;
 
-    @Column(nullable = false, length = 1)
-    private Integer status;
+    @ManyToOne
+    @JoinColumn(name = "friend_send")
+    private User friend_send;
 }

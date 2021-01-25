@@ -22,20 +22,24 @@ public class User extends BaseEntity
     private String userImg;
 
     @Column(length = 100, nullable = false, unique = true)
-    @NotBlank(message = "username cannot be null")
+    @NotBlank(message = "Username cannot be null")
     private String username;
 
     @Column(nullable = false)
-    @NotBlank(message = "Full name cannot be null")
-    private String fullName;
+    @NotBlank(message = "First name cannot be null")
+    private String firstName;
 
     @Column(nullable = false)
-    @NotBlank(message = "password cannot be null")
+    @NotBlank(message = "Last name cannot be null")
+    private String lastName;
+
+    @Column(nullable = false)
+    @NotBlank(message = "Password cannot be null")
     private String password;
 
     @Column(nullable = false, unique = true, length = 100)
-    @NotBlank(message = "email cannot be null")
-    @Email(message = "phải là email")
+    @NotBlank(message = "Email cannot be null")
+    @Email(message = "Must be email")
     private String email;
 
     @Column(length = 1)
@@ -44,8 +48,8 @@ public class User extends BaseEntity
     @Column()
     private Date dateOfBirth;
 
-    @Column(length = 1)
-    private String isActive;
+//    @Column(length = 1)
+//    private String isActive;
 
     @Column
     private String rememberToken;

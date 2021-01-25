@@ -59,10 +59,15 @@
         <span sec:authentication="name"></span><br>
     </p>
 
-    <p>Full name:
-        <b>[[${#request.userPrincipal.principal.fullName}]]</b>
-        <span sec:authentication="principal.fullName"></span><br>
+    <p>First name:
+        <b>[[${#request.userPrincipal.principal.firstName}]]</b>
+        <span sec:authentication="principal.firstName"></span><br>
     </p>
+    <p>Last name:
+        <b>[[${#request.userPrincipal.principal.lastName}]]</b>
+        <span sec:authentication="principal.lastName"></span><br>
+    </p>
+
     <p>Img:
         <b>[[${#request.userPrincipal.principal.userImg}]]</b>
     </p>
