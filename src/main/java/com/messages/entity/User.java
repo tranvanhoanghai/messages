@@ -1,11 +1,15 @@
 package com.messages.entity;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
+import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +20,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User extends BaseEntity
 {
     @Column
@@ -60,33 +65,38 @@ public class User extends BaseEntity
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private List<Role> roles = new ArrayList<>();
+    private Set<Role> roles;
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Messengers> messengers = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private List<GroupUser> groupUsers = new ArrayList<>();
+    private Set<GroupUser> groupUsers = new HashSet<>();
 
     @OneToMany(mappedBy = "friend_send", cascade = CascadeType.ALL)
-    private List<Friend> friend_send = new ArrayList<>();
+    private Set<Friend> friend_send = new HashSet<>();
 
     @OneToMany(mappedBy = "friend_reply", cascade = CascadeType.ALL)
-    private List<Friend> friend_reply = new ArrayList<>();
+    private Set<Friend> friend_reply = new HashSet<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private List<Post> posts = new ArrayList<>();
+    private Set<Post> posts = new HashSet<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    private Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "group_user_send", cascade = CascadeType.ALL)
-    private List<MessGroup> messGroups = new ArrayList<>();
+    private Set<MessGroup> messGroups = new HashSet<>();
 
     @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
-    private List<Conversations> conversations = new ArrayList<>();
+//    @JsonIgnoreProperties("costMaterials")
+//    @JsonIgnoreProperties("user1")
+    private List<Conversation> conversations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user2", cascade = CascadeType.ALL)
-    private List<Conversations> conversations2 = new ArrayList<>();
+    @OneToMany(mappedBy = "user2",  cascade = CascadeType.ALL)
+//    @JsonIgnoreProperties("costMaterials")
+//    @JsonIgnoreProperties("user2")
+    private List<Conversation> conversations2 = new ArrayList<>();
 
 }

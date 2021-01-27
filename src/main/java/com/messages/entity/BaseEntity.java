@@ -21,8 +21,8 @@ public abstract class BaseEntity
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable=false)
     @CreationTimestamp
     private Date createdAt = new Date();
 

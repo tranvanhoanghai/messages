@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import java.util.List;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "role")
 @Data
@@ -20,7 +21,7 @@ public class Role extends BaseEntity {
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    private List<User> users;
+    private Set<User> users;
 
     public Role(String name) {
         super();

@@ -21,20 +21,20 @@ public class EmployeeController {
             return "redirect:/home";
         }
         model.addAttribute("listEmp", employeeService.searchEmployee(term));
-        return "home";
+        return "employee/home";
     }
 
     @GetMapping("/employee")
     public String view(Model model){
         model.addAttribute("listEmp", employeeService.getAllEmployee());
-        return "home";
+        return "employee/home";
     }
 
     @GetMapping("/showNewEmployeeForm")
     public String showNewEmployeeForm(Model model){
         Employee employee  = new Employee();
         model.addAttribute("employee", employee);
-        return "add";
+        return "employee/add";
     }
 
     @PostMapping("/employee")
@@ -48,7 +48,7 @@ public class EmployeeController {
     public String showFormUpdate(@PathVariable(value = "id") long id, Model model){
         Employee employee  = employeeService.getEmployeeById(id);
         model.addAttribute("employee", employee);
-        return "update";
+        return "employee/update";
     }
 
     @PostMapping("/delete/{id}")

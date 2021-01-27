@@ -7,9 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class UserDetailServiceImpl implements UserDetails { // Custom get user detail
 
@@ -24,7 +22,7 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
     }
 
     public String getFullName() {
-        return user.getFirstName() + user.getLastName();
+        return user.getFirstName() +" "+ user.getLastName();
     }
 
     public String getUserImg() {
@@ -54,9 +52,9 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 
-        List<Role> roles = user.getRoles();
+        Set<Role> roles = user.getRoles();
         for (Role role : roles) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
         }

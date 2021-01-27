@@ -1,7 +1,9 @@
 package com.messages.service;
 
-import com.messages.entity.Conversations;
+import com.messages.entity.Conversation;
+
+import java.util.List;
 
 public interface ConversationService {
-    Conversations checkCvt(Integer user1, Integer user2);
+    Conversation checkCvt(Integer user1, Integer user2);
 }

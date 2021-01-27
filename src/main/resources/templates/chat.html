@@ -25,7 +25,7 @@
                 <div class="sidebar" style="height: 90vh;">
                     <div class="search">
                         <form th:action="@{/chat}" method="post">
-                            <input type="text" class="form-control" name="key" placeholder="Search for conversations" required>
+                            <input type="text" class="form-control" name="key" placeholder="Search for conversations" required autofocus="off">
                         </form>
                     </div>
 
@@ -48,11 +48,11 @@
                                 <div class="member" th:each="user : ${list}">
                                     <a href="#" th:id="${user.id}">
                                         <th:block th:if="${user.userImg == null}">
-                                            <img class="avatar-img" th:src="@{img/avatars/default.jpg}" alt="">
+                                            <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
                                         </th:block>
 
                                         <th:block th:if="${user.userImg != null}">
-                                            <img class="avatar-img" th:src="@{'img/avatars/' +${user.userImg}}" alt="">
+                                            <img class="avatar-img" th:src="@{'img/avatars/' +${user.userImg}}" alt="" >
                                         </th:block>
 
                                         <div class="status">
@@ -60,8 +60,8 @@
                                         </div>
                                         <div class="data">
                                             <h5 class="name" th:text="${user.lastName} +' '+ ${user.firstName}"></h5>
-                                            <span class="date-send read">Mon</span>
-                                            <p class="short-chat read">A new feature has been updated to your account. Check it out...</p>
+<!--                                            <span class="date-send read">Mon</span>-->
+<!--                                            <p class="short-chat read">A new feature has been updated to your account. Check it out...</p>-->
                                         </div>
                                     </a>
                                 </div>
@@ -125,125 +125,41 @@
 
                     <div class="content" id="content">
                         <div class="container-fuild">
-                            <div class="col-lg-12">
-                                <div class="date">
-                                    <hr>
-                                    <span>Yesterday</span>
-                                    <hr>
-                                </div>
+                            <th:block th:unless="${#lists.isEmpty(mess)}">
 
-                                <div class="message">
-                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">
-                                    <div class="text-main">
-                                        <div class="text-group">
-                                            <div class="text">
-                                                <p>We've got some killer ideas kicking about already.</p>
-                                            </div>
-                                        </div>
-                                        <span>09:46 AM</span>
-                                    </div>
-                                </div>
+                                <div class="col-lg-12" th:each="content : ${mess}">
 
-                                <div class="message me">
-                                    <div class="text-main">
-                                        <div class="text-group me">
-                                            <div class="text me">
-                                                <p>Can't wait! How are we coming along with the client?</p>
-                                            </div>
-                                        </div>
-                                        <span>11:32 AM</span>
+                                    <div class="date">
+                                        <hr>
+                                        <span th:text="${content.startTime}"></span>
+                                        <hr>
                                     </div>
-                                </div>
-                                <div class="message">
-                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                                    <div class="text-main">
-                                        <div class="text-group">
-                                            <div class="text">
-                                                <p>We've got some killer ideas kicking about already.</p>
-                                            </div>
-                                        </div>
-                                        <span>09:46 AM</span>
-                                    </div>
-                                </div>
 
-                                <div class="message me">
-                                    <div class="text-main">
-                                        <div class="text-group me">
-                                            <div class="text me">
-                                                <p>Can't wait! How are we coming along with the client?</p>
-                                            </div>
-                                        </div>
-                                        <span>11:32 AM</span>
-                                    </div>
-                                </div>
-                                <div class="message">
-                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                                    <div class="text-main">
-                                        <div class="text-group">
-                                            <div class="text">
-                                                <p>We've got some killer ideas kicking about already.</p>
-                                            </div>
-                                        </div>
-                                        <span>09:46 AM</span>
-                                    </div>
-                                </div>
+<!--                                    <div class="message">-->
+<!--                                        <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">-->
+<!--                                        <div class="text-main">-->
+<!--                                            <div class="text-group">-->
+<!--                                                <div class="text">-->
+<!--                                                    <p th:text="${content.content}"></p>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <span>09:46 AM</span>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
 
-                                <div class="message me">
-                                    <div class="text-main">
-                                        <div class="text-group me">
-                                            <div class="text me">
-                                                <p>Can't wait! How are we coming along with the client?</p>
+                                    <div class="message me">
+                                        <div class="text-main">
+                                            <div class="text-group me">
+                                                <div class="text me">
+                                                    <p th:text="${content.content}"></p>
+                                                </div>
                                             </div>
+                                            <span th:text="${content.timeSend}"></span>
                                         </div>
-                                        <span>11:32 AM</span>
                                     </div>
-                                </div>
-                                <div class="message">
-                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                                    <div class="text-main">
-                                        <div class="text-group">
-                                            <div class="text">
-                                                <p>We've got some killer ideas kicking about already.</p>
-                                            </div>
-                                        </div>
-                                        <span>09:46 AM</span>
-                                    </div>
-                                </div>
 
-                                <div class="message me">
-                                    <div class="text-main">
-                                        <div class="text-group me">
-                                            <div class="text me">
-                                                <p>Can't wait! How are we coming along with the client?</p>
-                                            </div>
-                                        </div>
-                                        <span>11:32 AM</span>
-                                    </div>
                                 </div>
-                                <div class="message">
-                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg">
-                                    <div class="text-main">
-                                        <div class="text-group">
-                                            <div class="text">
-                                                <p>We've got some killer ideas kicking about already.</p>
-                                            </div>
-                                        </div>
-                                        <span>09:46 AM</span>
-                                    </div>
-                                </div>
-
-                                <div class="message me">
-                                    <div class="text-main">
-                                        <div class="text-group me">
-                                            <div class="text me">
-                                                <p>Can't wait! How are we coming along with the client?</p>
-                                            </div>
-                                        </div>
-                                        <span>11:32 AM</span>
-                                    </div>
-                                </div>
-
-                            </div>
+                            </th:block>
                         </div>
                     </div>
 
@@ -259,6 +175,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
@@ -270,9 +187,8 @@
 
 <th:block id="script">
     <script type="text/javascript">
-        function scrollToBottom(el) { el.scrollTop = el.scrollHeight; }
-        scrollToBottom(document.getElementById('content'));
-
+<!--          function scrollToBottom(el) { el.scrollTop = el.scrollHeight; }-->
+<!--          scrollToBottom(document.getElementById('content'));-->
         $(document).ready(function(){
         	getId();
         });
@@ -280,10 +196,44 @@
         function getId(){
     		$('.member a').click(function(){
     			var id = $(this).attr("id");
-                console.log(id);
-	        })
-	    }
-        
+
+                $.ajax({
+                    type: "GET",
+                    url: "/conversation/" + id,
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function(data) {
+                        var getIdCvt = data.id;
+                       	console.log(data);
+                      	getMessByIdCvt(getIdCvt);
+                       	// window.location.href = "/conversation/" + getIdCvt + "/mess";
+                    },
+                    error: function(e) {
+                        console.log("errors")
+                        console.log(e)
+                    }
+                });
+            });
+        }
+
+        function getMessByIdCvt(id){
+    		$.ajax({
+                type: "get",
+                url: "/conversation/" + id + "/mess",
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: {},
+                success: function(data) {
+					// window.history.pushState({}, "","/conversation/" + getIdCvt + "/mess");
+                	console.log(data);
+                },
+                error: function(e) {
+                    console.log(e)
+                    console.log("errors 1")
+                }
+            });
+    	}
         
     </script>
 </th:block>

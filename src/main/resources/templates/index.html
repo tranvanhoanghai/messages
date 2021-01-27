@@ -14,20 +14,14 @@
 
 <body>
 <!-- create navigation bar ( header) -->
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
+
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<th:block th:if="${#lists.isEmpty(user)}">
+
+<th:block th:if="${#lists.isEmpty(check)}">
     <h5>No contacts</h5>
 </th:block>
 
-<th:block th:unless="${#lists.isEmpty(user)}">
+<th:block th:unless="${#lists.isEmpty(check)}">
     <table class="table table-striped">
         <thead>
         <tr>
@@ -39,12 +33,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="employee,iterStat : ${user}">
-            <th scope="row" th:text="${iterStat.count}"></th>
-            <td th:text="${employee.fullName}"></td>
-            <td th:text="${employee.username}"></td>
-            <td th:text="${employee.email}"></td>
-
+        <tr th:each="convt : ${check}">
+            <td th:text="${convt.id}"></td>
+            <td th:text="${convt.user1}"></td>
+            <td th:text="${convt.user2}"></td>
         </tr>
         </tbody>
     </table>
@@ -59,13 +51,10 @@
         <span sec:authentication="name"></span><br>
     </p>
 
-    <p>First name:
-        <b>[[${#request.userPrincipal.principal.firstName}]]</b>
-        <span sec:authentication="principal.firstName"></span><br>
-    </p>
+
     <p>Last name:
-        <b>[[${#request.userPrincipal.principal.lastName}]]</b>
-        <span sec:authentication="principal.lastName"></span><br>
+        <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+        <span sec:authentication="principal.fullName"></span><br>
     </p>
 
     <p>Img:
@@ -73,9 +62,6 @@
     </p>
     <p>pass:
         <span sec:authentication="principal.password"></span><br>
-    </p>
-    <p>is active:
-        <span sec:authentication="principal.isActive"></span><br>
     </p>
     <p>dateOfBirth:
         <span sec:authentication="principal.dateOfBirth"></span><br>

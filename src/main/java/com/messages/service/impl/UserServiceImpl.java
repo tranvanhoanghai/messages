@@ -20,7 +20,6 @@ public class UserServiceImpl implements com.messages.service.UserService {
          userRepository.save(user);
     }
 
-
     @Override // Cấu hình đăng nhập
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);

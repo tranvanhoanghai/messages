@@ -11,10 +11,10 @@
 <nav class="container menu" th:fragment="nav-default">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link active" href="@{/chat.html}"><i class="far fa-comment"></i></a>
+            <a class="nav-link active" th:href="@{/chat}"><i class="far fa-comment"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="@{/home.html}"><i class="fas fa-home"></i></a>
+            <a class="nav-link" th:href="@{/home}"><i class="fas fa-home"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#"><i class="far fa-bell"></i></a>
@@ -31,7 +31,7 @@
                     </th:block>
 
                     <th:block th:if="${#request.userPrincipal.principal.userImg != null}">
-                        <img class="avatar" th:src="@{'img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="">
+                        <img class="avatar" th:src="@{'../../img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="">
                     </th:block>
                 </a>
                 <ul class="dropdown-menu" style="z-index: 9;">
