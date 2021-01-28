@@ -1,7 +1,7 @@
 package com.messages.entity;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,16 +9,19 @@ import java.util.List;
 
 @Entity
 @Table(name = "conversation")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Conversation extends BaseEntity
 {
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user1")
 //    @JsonBackReference
     private User user1;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "user2")
 //    @JsonBackReference
     private User user2;

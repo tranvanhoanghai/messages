@@ -26,7 +26,7 @@ public interface ConversationRepository extends JpaRepository<Conversation, Inte
     void saveConversation (@Param("user1") Integer user1, @Param("user2") Integer user2);
 
     // Lấy nội dung tin nhắn từ id Conversation
-    @Query(value = "select * from Conversation c inner join Messengers m on c.id = m.cvt_id where c.id=?1", nativeQuery = true)
-    List<Conversation> getMessByIdConversation(Integer idConversation);
+//    @Query(value = "select * from Conversation c inner join Messengers m on c.id = m.cvt_id where c.id=?1", nativeQuery = true)
+//    List<Conversation> getMessByIdConversation(Integer idConversation);
 
 }

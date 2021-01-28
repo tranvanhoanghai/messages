@@ -2,14 +2,12 @@ package com.messages.entity;
 
 import com.fasterxml.jackson.annotation.*;
 import lombok.*;
-import org.hibernate.type.descriptor.sql.TinyIntTypeDescriptor;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -68,26 +66,26 @@ public class User extends BaseEntity
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
-    @JsonManagedReference
+//    @JsonManagedReference
     private List<Messengers> messengers = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private Set<GroupUser> groupUsers = new HashSet<>();
+    private List<GroupUser> groupUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "friend_send", cascade = CascadeType.ALL)
-    private Set<Friend> friend_send = new HashSet<>();
+    private List<Friend> friend_send = new ArrayList<>();
 
     @OneToMany(mappedBy = "friend_reply", cascade = CascadeType.ALL)
-    private Set<Friend> friend_reply = new HashSet<>();
+    private List<Friend> friend_reply = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private Set<Post> posts = new HashSet<>();
+    private List<Post> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)
-    private Set<Comment> comments = new HashSet<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @OneToMany(mappedBy = "group_user_send", cascade = CascadeType.ALL)
-    private Set<MessGroup> messGroups = new HashSet<>();
+    private List<MessGroup> messGroups = new ArrayList<>();
 
     @OneToMany(mappedBy = "user1", cascade = CascadeType.ALL)
 //    @JsonIgnoreProperties("costMaterials")

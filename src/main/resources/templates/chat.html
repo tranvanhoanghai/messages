@@ -46,9 +46,9 @@
                             <div class="tab-pane fade show active" id="all">
 
                                 <div class="member" th:each="user : ${list}">
-                                    <a href="#" th:id="${user.id}">
+                                    <a href="#" th:id="${user.id}" th:data-name="${user.lastName} +' '+ ${user.firstName}">
                                         <th:block th:if="${user.userImg == null}">
-                                            <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
+                                            <img class="avatar-img" alt="" src="../../img/avatars/default.jpg" data-img="">
                                         </th:block>
 
                                         <th:block th:if="${user.userImg != null}">
@@ -98,14 +98,14 @@
                         <div class="col-md-12">
                             <div class="inside" style="position: relative;">
                                 <a href="#">
-                                    <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">
+                                    <img class="avatar-img" id="img" src="" alt="">
                                 </a>
                                 <div class="status">
                                     <i class="fas fa-circle"></i>
                                 </div>
                                 <div class="data">
-                                    <h5><a href="#">Keith Morris</a></h5>
-                                    <span>Active now</span>
+                                    <h5><a href="#" id="name"></a></h5>
+<!--                                    <span>Active now</span>-->
                                 </div>
                                 <div class="btn-groups">
                                     <button><i class="fas fa-phone-alt"></i></button>
@@ -125,41 +125,52 @@
 
                     <div class="content" id="content">
                         <div class="container-fuild">
-                            <th:block th:unless="${#lists.isEmpty(mess)}">
+                                <div class="col-lg-12">
+                                    <th:block th:unless="${#lists.isEmpty(mess)}" th:each="content : ${mess}">
 
-                                <div class="col-lg-12" th:each="content : ${mess}">
+                                        <div class="date">
+                                            <hr>
+                                            <span th:text="${#dates.format(content.startTime, 'dd-MMM-yyyy')}"></span>
+                                            <hr>
+                                        </div>
 
-                                    <div class="date">
-                                        <hr>
-                                        <span th:text="${content.startTime}"></span>
-                                        <hr>
-                                    </div>
+                                        <th:block th:if="${content.user_send.id} != ${#request.userPrincipal.principal.id}">
+                                            <div class="message">
+                                                <th:block th:if="${content.cvt_id.user1} != ${#request.userPrincipal.principal.id}">
+                                                    <th:block th:if="${content.cvt_id.user1.userImg == null}">
+                                                        <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
+                                                    </th:block>
 
-<!--                                    <div class="message">-->
-<!--                                        <img class="avatar-img" src="img/avatars/avatar-female-5.jpg" alt="">-->
-<!--                                        <div class="text-main">-->
-<!--                                            <div class="text-group">-->
-<!--                                                <div class="text">-->
-<!--                                                    <p th:text="${content.content}"></p>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
-<!--                                            <span>09:46 AM</span>-->
-<!--                                        </div>-->
-<!--                                    </div>-->
+                                                    <th:block th:if="${content.cvt_id.user1.userImg != null}">
+                                                        <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.userImg}}">
+                                                    </th:block>
+                                                </th:block>
 
-                                    <div class="message me">
-                                        <div class="text-main">
-                                            <div class="text-group me">
-                                                <div class="text me">
-                                                    <p th:text="${content.content}"></p>
+                                                <div class="text-main">
+                                                    <div class="text-group">
+                                                        <div class="text">
+                                                            <p th:text="${content.content}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <span th:text="${#dates.format(content.timeSend, 'HH:mm')}"></span>
                                                 </div>
                                             </div>
-                                            <span th:text="${content.timeSend}"></span>
-                                        </div>
-                                    </div>
+                                        </th:block>
 
+                                        <th:block th:if="${content.user_send.id} == ${#request.userPrincipal.principal.id}">
+                                            <div class="message me">
+                                                <div class="text-main">
+                                                    <div class="text-group me">
+                                                        <div class="text me">
+                                                            <p th:text="${content.content}"></p>
+                                                        </div>
+                                                    </div>
+                                                    <span th:text="${#dates.format(content.timeRead, 'HH:mm')}"></span>
+                                                </div>
+                                            </div>
+                                        </th:block>
+                                    </th:block>
                                 </div>
-                            </th:block>
                         </div>
                     </div>
 
@@ -167,7 +178,7 @@
                         <i class="fas fa-images"></i>
                         <i class="fas fa-smile"></i>
                         <div class="send-input w-100">
-                            <textarea class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
+                            <textarea id="content-chat" class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
                         </div>
                         <div class="send" style="padding: 10px;">
                             <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>
@@ -178,9 +189,8 @@
 
         </div>
     </div>
+    <b id="id-login" class="d-none">[[${#request.userPrincipal.principal.id}]]</b>
 </div>
-
-
 <!--<div id="footer" align="center" th:replace="~{/fragments/app-fragments :: copyright}">-->
 <!--    Footer-->
 <!--</div>-->
@@ -191,11 +201,18 @@
 <!--          scrollToBottom(document.getElementById('content'));-->
         $(document).ready(function(){
         	getId();
+        	send();
         });
 
         function getId(){
     		$('.member a').click(function(){
     			var id = $(this).attr("id");
+
+    			var name = $(this).data('name');
+    			var img = $(this).find('img').attr('src');
+    			$("#name").text(name);
+    			$("#img").attr('src', img);
+
 
                 $.ajax({
                     type: "GET",
@@ -205,9 +222,10 @@
 
                     success: function(data) {
                         var getIdCvt = data.id;
-                       	console.log(data);
-                      	getMessByIdCvt(getIdCvt);
-                       	// window.location.href = "/conversation/" + getIdCvt + "/mess";
+<!--                       	console.log(data);-->
+<!--                     	getMessByIdCvt(getIdCvt);-->
+							send(getIdCvt);
+                       	window.location = "/conversation/" + getIdCvt + "/mess";
                     },
                     error: function(e) {
                         console.log("errors")
@@ -217,23 +235,51 @@
             });
         }
 
-        function getMessByIdCvt(id){
-    		$.ajax({
-                type: "get",
-                url: "/conversation/" + id + "/mess",
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                data: {},
-                success: function(data) {
-					// window.history.pushState({}, "","/conversation/" + getIdCvt + "/mess");
-                	console.log(data);
-                },
-                error: function(e) {
-                    console.log(e)
-                    console.log("errors 1")
-                }
-            });
-    	}
+<!--        function send(idCvt){-->
+<!--        	$(".send").click(function(){-->
+<!--        		var content = $("#content-chat").val();-->
+<!--        		var idUser = $("#id-login").text();-->
+<!--        		console.log();-->
+<!--        		$.ajax({-->
+<!--                    type: "GET",-->
+<!--                    url: "/conversation/add",-->
+<!--                    dataType: 'json',-->
+<!--                    data: JSON.stringify(content),-->
+<!--                    contentType: "application/json; charset=utf-8",-->
+
+<!--                    success: function(data) {-->
+<!--                    	console(data);-->
+
+<!--                    },-->
+<!--                    error: function(e) {-->
+<!--                        console.log("errorsssssss")-->
+<!--                        console.log(e)-->
+<!--                    }-->
+<!--                });-->
+<!--        	});-->
+<!--        }-->
+
+<!--        function getMessByIdCvt(id){-->
+<!--    		$.ajax({-->
+<!--                type: "get",-->
+<!--                url: "/conversation/" + id + "/mess",-->
+<!--                dataType: 'json',-->
+<!--                contentType: "application/json; charset=utf-8",-->
+<!--                data: {},-->
+<!--                success: function(data) {-->
+<!--					// window.history.pushState({}, "","/conversation/" + getIdCvt + "/mess");-->
+<!--                	for (var i = 0; i < data.length; i++) {-->
+<!--                	    console.log(data[i].id);-->
+<!--                	    console.log(data[i].user_send);-->
+<!--                	    console.log(data[i].cvt_id);-->
+<!--                	}-->
+<!--                },-->
+<!--                error: function(e) {-->
+<!--                    console.log(e)-->
+<!--                    console.log("errors 1")-->
+<!--                }-->
+<!--            });-->
+<!--    	}-->
         
     </script>
 </th:block>

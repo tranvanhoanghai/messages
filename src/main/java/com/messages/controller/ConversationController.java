@@ -21,9 +21,6 @@ public class ConversationController
     private ConversationService conversationService;
 
     @Autowired
-    private MessengersRepository messengersRepository;
-
-    @Autowired
     private FriendService friendService;
 
     @GetMapping("/{id}")

@@ -3,14 +3,17 @@ package com.messages.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "messenger")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Messengers extends BaseEntity
 {

@@ -14,10 +14,15 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public Friend checkFriends(Integer friend_send, Integer friend_reply) {
-        Friend friend = friendRepository.checkFriend(friend_send, friend_reply);
-        if(friend == null){
-            friendRepository.saveFriend(friend_send, friend_reply);
-        }
-        return friend;
+        return null;
     }
+
+//    @Override
+//    public Friend checkFriends(Integer friend_send, Integer friend_reply) {
+//        Friend friend = friendRepository.checkFriend(friend_send, friend_reply);
+//        if(friend == null){
+//            friendRepository.saveFriend(friend_send, friend_reply);
+//        }
+//        return friend;
+//    }
 }

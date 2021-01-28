@@ -2,16 +2,14 @@ package com.messages.controller;
 
 import com.messages.entity.Messengers;
 import com.messages.repository.MessengersRepository;
+import com.messages.service.MessengersService;
 import com.messages.service.UserService;
 import com.messages.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +20,8 @@ public class ChatController {
     private UserService userService;
 
     @Autowired
-    private MessengersRepository messengersRepository;
+    private MessengersService messengersService;
+
 
     @GetMapping("/chat")
     public String homeChat(@AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, Model model) {
@@ -37,10 +36,22 @@ public class ChatController {
     }
 
     @GetMapping("/conversation/{id}/mess")
-    @ResponseBody
-    public List<Messengers> getMessByIdConversation(@AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, @PathVariable(value = "id") Integer id, Model model){
-//        model.addAttribute("list",userService.getListExceptUserChat(userDetailServiceImpl.getId()));
-//        model.addAttribute("mess", messengersRepository.getMessByIdConversation(id));
-        return  messengersRepository.getMessByIdConversation(id);
+    public String getMessByIdConversation(@AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, @PathVariable(value = "id") Integer id, Model model){
+        model.addAttribute("list",userService.getListExceptUserChat(userDetailServiceImpl.getId()));
+        model.addAttribute("mess", messengersService.getAllMessByIdCvt(id));
+        return "chat";
     }
+
+//    @GetMapping("/conversation/add")
+//    @ResponseBody
+//    public String setMessByIdConversation(String content, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl){
+//        messengersService.saveMess(1,userDetailServiceImpl.getId(),null,"content");
+//        return "chat";
+//    }
+
+//    @GetMapping("/conversation/{id}/mess")
+//    @ResponseBody
+//    public List<Messengers> getMessByIdConversations(@PathVariable(value = "id") Integer id){
+//        return  messengersService.getAllMessByIdCvt(id);
+//    }
 }

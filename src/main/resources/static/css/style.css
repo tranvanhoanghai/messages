@@ -188,9 +188,9 @@ main .sidebar .content .member a {
 
 .avatar-img {
     width: 100%;
-    height: 55px;
-    min-width: 55px;
-    max-width: 55px;
+    height: 45px;
+    min-width: 45px;
+    max-width: 45px;
     border: 2px solid var(--border-img);
     border-radius: 100%;
     margin-right: 15px;
@@ -202,17 +202,17 @@ main .sidebar .content .member .status {
     width: 20px;
     height: 20px;
     right: 0;
-    left: -8px;
-    border: 5px solid #fff;
+    left: -10px;
+    border: 10px solid #fff;
     margin-top: 12px;
     border-radius: 100%;
 }
 
 main .sidebar .content .member .status i {
     position: absolute;
-    left: -3px;
-    bottom: -3px;
-    font-size: 16px;
+    left: -5px;
+    bottom: -5px;
+    font-size: 10px;
 }
 
 main .sidebar .content .member .status .active {
@@ -359,7 +359,6 @@ main .main-chat .content .date {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 26px 0 46px;
     color: var(--text-color-black);
 }
 
@@ -368,17 +367,17 @@ main .main-chat .content .message {
     display: flex;
     -ms-flex-align: end;
     align-items: flex-end;
-    margin-bottom: 20px;
     width: 100%;
 }
 
 main .main-chat .content .message span{
     color: var(--text-color-black);
+    font-size:12px;
 }
 
 main .main-chat .content .message .text {
     display: inline-block;
-    padding: 15px;
+    padding: 10px;
     max-width: 450px;
     background: var(--input-bg);
     border-radius: 6px;
