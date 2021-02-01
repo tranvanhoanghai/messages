@@ -21,4 +21,8 @@ public interface FriendRepository extends JpaRepository<Friend, Integer> {
 //    @Transactional
 //    @Query(value = "insert into Friend (friend_send, friend_reply) values (:friend_send, :friend_reply)", nativeQuery = true)
 //    void saveFriend (@Param("friend_send") Integer friend_send, @Param("friend_reply") Integer friend_reply);
+
+    // Count the user's friends
+    @Query(value = "select count(*) from friend f where (f.friend_send = :idUser or f.friend_reply = :idUser) and f.status = 1", nativeQuery = true)
+    Integer countFriend(@Param("idUser") Integer idUser);
 }

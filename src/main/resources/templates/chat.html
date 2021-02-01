@@ -52,7 +52,7 @@
                                         </th:block>
 
                                         <th:block th:if="${user.userImg != null}">
-                                            <img class="avatar-img" th:src="@{'img/avatars/' +${user.userImg}}" alt="" >
+                                            <img class="avatar-img" th:src="@{'../../img/avatars/' +${user.userImg}}" alt="" >
                                         </th:block>
 
                                         <div class="status">
@@ -201,7 +201,7 @@
 <!--          scrollToBottom(document.getElementById('content'));-->
         $(document).ready(function(){
         	getId();
-        	send();
+<!--        	send();-->
         });
 
         function getId(){
@@ -224,7 +224,7 @@
                         var getIdCvt = data.id;
 <!--                       	console.log(data);-->
 <!--                     	getMessByIdCvt(getIdCvt);-->
-							send(getIdCvt);
+<!--							send(getIdCvt);-->
                        	window.location = "/conversation/" + getIdCvt + "/mess";
                     },
                     error: function(e) {

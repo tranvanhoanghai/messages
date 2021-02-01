@@ -17,6 +17,11 @@ public class FriendServiceImpl implements FriendService {
         return null;
     }
 
+    @Override
+    public Integer countFriend(Integer id) {
+        return friendRepository.countFriend(id);
+    }
+
 //    @Override
 //    public Friend checkFriends(Integer friend_send, Integer friend_reply) {
 //        Friend friend = friendRepository.checkFriend(friend_send, friend_reply);

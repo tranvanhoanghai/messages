@@ -38,4 +38,9 @@ public class UserServiceImpl implements com.messages.service.UserService {
     public List<User> searchUser(String key) {
         return userRepository.findByFirstName(key);
     }
+
+    @Override
+    public void uploadUserImg(String img, Integer id) {
+        userRepository.updateUserImg(img, id);
+    }
 }

@@ -22,7 +22,7 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
     }
 
     public String getFullName() {
-        return user.getFirstName() +" "+ user.getLastName();
+        return user.getLastName() +" "+ user.getFirstName();
     }
 
     public String getUserImg() {

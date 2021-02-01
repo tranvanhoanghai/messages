@@ -36,7 +36,7 @@
                 </a>
                 <ul class="dropdown-menu" style="z-index: 9;">
                     <li>
-                        <a class="dropdown-item" th:href="@{/profile}">
+                        <a class="dropdown-item" th:href="@{/profile/} + ${#request.userPrincipal.principal.id}">
                             <i class="far fa-user"></i>
                             <span>Profile</span>
                         </a>

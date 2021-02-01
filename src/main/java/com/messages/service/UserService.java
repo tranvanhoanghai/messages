@@ -1,6 +1,5 @@
 package com.messages.service;
 
-import com.messages.entity.Employee;
 import com.messages.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -13,5 +12,7 @@ public interface UserService extends UserDetailsService
     List<User> getListExceptUserChat(Integer exceptUsername); // lấy user nằm trong list bạn bè ngoại trừ user login
 
     List<User> searchUser(String key); // Tìm kiếm tất cả user.
+
+    void uploadUserImg(String img, Integer id); // upload img user
 
 }

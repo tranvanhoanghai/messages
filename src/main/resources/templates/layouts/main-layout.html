@@ -3,6 +3,8 @@
       th:fragment="main-fragment (title, otherStaticResources, header, mainContent, footer, script)">
 <head>
     <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title th:replace="${title}">Page 1 Title</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" href="../../static/css/style.css"/>
