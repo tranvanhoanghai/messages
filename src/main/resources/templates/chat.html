@@ -136,15 +136,13 @@
 
                                         <th:block th:if="${content.user_send.id} != ${#request.userPrincipal.principal.id}">
                                             <div class="message">
-                                                <th:block th:if="${content.cvt_id.user1} != ${#request.userPrincipal.principal.id}">
-                                                    <th:block th:if="${content.cvt_id.user1.userImg == null}">
+                                                    <th:block th:if="${content.user_send.userImg == null}">
                                                         <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
                                                     </th:block>
 
-                                                    <th:block th:if="${content.cvt_id.user1.userImg != null}">
-                                                        <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.cvt_id.user1.userImg}}">
+                                                    <th:block th:if="${content.user_send.userImg != null}">
+                                                        <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.user_send.userImg}}">
                                                     </th:block>
-                                                </th:block>
 
                                                 <div class="text-main">
                                                     <div class="text-group">
@@ -159,6 +157,8 @@
 
                                         <th:block th:if="${content.user_send.id} == ${#request.userPrincipal.principal.id}">
                                             <div class="message me">
+                                                <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.user_send.userImg}}">
+
                                                 <div class="text-main">
                                                     <div class="text-group me">
                                                         <div class="text me">
