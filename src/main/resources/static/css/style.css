@@ -548,7 +548,7 @@ main .main-chat .bottom i {
    display: flex;
    justify-content: center;
    align-items: center;
-   padding: ;
+   padding: 0;
 }
 
 .profile .main .tab-item ul li{

@@ -22,24 +22,20 @@
     <div class="container">
         <div class="row header">
             <div class="col-md-3 avatar" style="text-align: center;">
-                <th:block th:if="${#request.userPrincipal.principal.userImg == null}">
-                    <img class="" th:src="@{../img/avatars/default.jpg}" alt="">
+                <th:block th:if="${#request.userPrincipal.principal.userImg == null}" >
+                    <img class="" th:src="@{../img/avatars/default.jpg}" alt="" data-bs-toggle="modal" data-bs-target="#img">
                 </th:block>
 
                 <th:block th:if="${#request.userPrincipal.principal.userImg != null}">
-                    <img class="" th:src="@{'/img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="">
+                    <img class="" th:src="@{'/img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="" data-bs-toggle="modal" data-bs-target="#img">
                 </th:block>
 
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
-                </button>
-
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
+                <div class="modal" id="img" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Change Profile Photo</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <form th:action="@{/profile/upload/} + ${#request.userPrincipal.principal.id}"  method="post" enctype="multipart/form-data">

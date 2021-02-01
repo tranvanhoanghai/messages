@@ -19,12 +19,10 @@ public class Messengers extends BaseEntity
 {
     @ManyToOne
     @JoinColumn(name = "user_send")
-//    @JsonBackReference
     private User user_send;
 
     @ManyToOne
     @JoinColumn(name = "cvt_id")
-//    @JsonBackReference
     private Conversation cvt_id;
 
     @Column

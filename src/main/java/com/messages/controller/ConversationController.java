@@ -26,7 +26,6 @@ public class ConversationController
     @GetMapping("/{id}")
     @ResponseBody
     public Conversation checkCvt(@PathVariable(value = "id") Integer id, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl){
-
         return conversationService.checkCvt(id, userDetailServiceImpl.getId());
     };
 
