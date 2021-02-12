@@ -19,7 +19,7 @@ public interface UserRepository extends JpaRepository<User, Integer>
     // lấy user nằm trong list bạn bè ngoại trừ user login
     @Query(value = "select * " +
             "from User u, friend f " +
-            "where ((f.friend_send = ?1 and u.id = friend_reply) or (f.friend_reply = ?1 and u.id = friend_send)) and (f.status = 1 or f.status = 0) ", nativeQuery = true)
+            "where ((f.friend_send = ?1 and u.id = friend_reply) or (f.friend_reply = ?1 and u.id = friend_send)) and (f.status = 0 or f.status = 1 or f.status = 2) ", nativeQuery = true)
     List<User> listExceptUserChat (Integer exceptUsername);
 
     // search user

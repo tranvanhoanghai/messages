@@ -484,7 +484,7 @@ main .main-chat .bottom i {
 }
 
 .profile .header {
-   padding-top: 20px;
+   padding: 20px 0;
 }
 
 .profile .container {
@@ -539,7 +539,7 @@ main .main-chat .bottom i {
 }
 
 .profile .main {
-    margin-top: 50px;
+
 }
 
 .profile .main .tab-item ul {
@@ -628,6 +628,11 @@ main .main-chat .bottom i {
     .container {
         max-width: 100%
     }
+
+    .profile .header {
+       padding-bottom: 0px;
+    }
+
     .profile .info {
         text-align: center;
     }
@@ -644,7 +649,7 @@ main .main-chat .bottom i {
         margin-bottom: 0;
     }
     .profile .info .edit {
-        margin-top: 20px;
+        margin: 20px 0;
     }
     .profile .main .post .post-item{
         margin-bottom: 20px;

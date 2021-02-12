@@ -1,5 +1,6 @@
 package com.messages.service.impl;
 
+import com.messages.entity.Employee;
 import com.messages.entity.User;
 import com.messages.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,17 @@ public class UserServiceImpl implements com.messages.service.UserService {
     @Override
     public void uploadUserImg(String img, Integer id) {
         userRepository.updateUserImg(img, id);
+    }
+
+    @Override
+    public User getUserById(Integer id){
+        Optional<User> optional = userRepository.findById(id);
+        User user = null;
+        if(optional.isPresent()){
+            user = optional.get();
+        }else{
+            throw new RuntimeException("Employee not found for id : " + id);
+        }
+        return user;
     }
 }

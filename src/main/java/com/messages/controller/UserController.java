@@ -1,11 +1,14 @@
 package com.messages.controller;
 
+import com.messages.entity.Friend;
 import com.messages.entity.User;
 import com.messages.repository.UserRepository;
 import com.messages.service.FriendService;
 import com.messages.service.UserService;
+import com.messages.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -36,9 +39,21 @@ public class UserController {
     private String fileUpload;
 
     @GetMapping("/{id}") // profile user
-    public String view(@PathVariable(value = "id") Integer id, Model model){
+    public String view(@PathVariable(value = "id") Integer id, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, Model model )
+    {
+        User user =  userService.getUserById(id);
         model.addAttribute("count", friendService.countFriend(id));
-        return "profile/profile";
+        model.addAttribute("profile", user);
+
+        if(id.equals(userDetailServiceImpl.getId())){
+            return "profile/profile";
+        }else{
+            Friend check = friendService.checkUserBlock(id, userDetailServiceImpl.getId());
+            if(check != null){
+                return "profile/block";
+            }
+            return "profile/profileFriend";
+        }
     }
 
     @GetMapping("/{id}/edit") // get id profile user edit

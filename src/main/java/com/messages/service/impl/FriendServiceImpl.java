@@ -12,14 +12,19 @@ public class FriendServiceImpl implements FriendService {
     @Autowired //inject bean
     private FriendRepository friendRepository;
 
-    @Override
-    public Friend checkFriends(Integer friend_send, Integer friend_reply) {
-        return null;
-    }
+//    @Override
+//    public Friend checkFriends(Integer friend_send, Integer friend_reply) {
+//        return null;
+//    }
 
     @Override
     public Integer countFriend(Integer id) {
         return friendRepository.countFriend(id);
+    }
+
+    @Override
+    public Friend checkUserBlock(Integer friend_send, Integer friend_reply) {
+      return friendRepository.checkFriendBlock(friend_send, friend_reply);
     }
 
 //    @Override
