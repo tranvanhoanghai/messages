@@ -93,98 +93,98 @@
             </div>
 
             <div class=" col-lg-8 col-xl-9">
-                <div class="main-chat">
-                    <div class="top">
-                        <div class="col-md-12">
-                            <div class="inside" style="position: relative;">
-                                <a href="#">
-                                    <img class="avatar-img" id="img" src="" alt="">
-                                </a>
-                                <div class="status">
-                                    <i class="fas fa-circle"></i>
-                                </div>
-                                <div class="data">
-                                    <h5><a href="#" id="name"></a></h5>
-<!--                                    <span>Active now</span>-->
-                                </div>
-                                <div class="btn-groups">
-                                    <button><i class="fas fa-phone-alt"></i></button>
-                                    <button><i class="fas fa-video"></i></button>
-                                    <div class="dropdown d-inline">
-                                        <button id="drop" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" style="margin: 0;"></i></button>
-                                        <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><button class="dropdown-item"><i class="fas fa-times"></i>Clear History</button></li>
-                                            <li><button class="dropdown-item"><i class="fas fa-times-circle"></i>Block Contact</button></li>
-                                            <li><button class="dropdown-item"><i class="fas fa-trash"></i>Delete Contact</button></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<!--                <div class="main-chat">-->
+<!--                    <div class="top">-->
+<!--                        <div class="col-md-12">-->
+<!--                            <div class="inside" style="position: relative;">-->
+<!--                                <a href="#">-->
+<!--                                    <img class="avatar-img" id="img" src="" alt="">-->
+<!--                                </a>-->
+<!--                                <div class="status">-->
+<!--                                    <i class="fas fa-circle"></i>-->
+<!--                                </div>-->
+<!--                                <div class="data">-->
+<!--                                    <h5><a href="#" id="name"></a></h5>-->
+<!--&lt;!&ndash;                                    <span>Active now</span>&ndash;&gt;-->
+<!--                                </div>-->
+<!--                                <div class="btn-groups">-->
+<!--                                    <button><i class="fas fa-phone-alt"></i></button>-->
+<!--                                    <button><i class="fas fa-video"></i></button>-->
+<!--                                    <div class="dropdown d-inline">-->
+<!--                                        <button id="drop" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" style="margin: 0;"></i></button>-->
+<!--                                        <ul class="dropdown-menu dropdown-menu-end">-->
+<!--                                            <li><button class="dropdown-item"><i class="fas fa-times"></i>Clear History</button></li>-->
+<!--                                            <li><button class="dropdown-item"><i class="fas fa-times-circle"></i>Block Contact</button></li>-->
+<!--                                            <li><button class="dropdown-item"><i class="fas fa-trash"></i>Delete Contact</button></li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="content" id="content">
-                        <div class="container-fuild">
-                                <div class="col-lg-12">
-                                    <th:block th:unless="${#lists.isEmpty(mess)}" th:each="content : ${mess}">
+<!--                    <div class="content" id="content">-->
+<!--                        <div class="container-fuild">-->
+<!--                                <div class="col-lg-12">-->
+<!--                                    <th:block th:unless="${#lists.isEmpty(mess)}" th:each="content : ${mess}">-->
 
-                                        <div class="date">
-                                            <hr>
-                                            <span th:text="${#dates.format(content.startTime, 'dd-MMM-yyyy')}"></span>
-                                            <hr>
-                                        </div>
+<!--                                        <div class="date">-->
+<!--                                            <hr>-->
+<!--                                            <span th:text="${#dates.format(content.startTime, 'dd-MMM-yyyy')}"></span>-->
+<!--                                            <hr>-->
+<!--                                        </div>-->
 
-                                        <th:block th:if="${content.user_send.id} != ${#request.userPrincipal.principal.id}">
-                                            <div class="message">
-                                                    <th:block th:if="${content.user_send.userImg == null}">
-                                                        <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
-                                                    </th:block>
+<!--                                        <th:block th:if="${content.user_send.id} != ${#request.userPrincipal.principal.id}">-->
+<!--                                            <div class="message">-->
+<!--                                                    <th:block th:if="${content.user_send.userImg == null}">-->
+<!--                                                        <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">-->
+<!--                                                    </th:block>-->
 
-                                                    <th:block th:if="${content.user_send.userImg != null}">
-                                                        <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.user_send.userImg}}">
-                                                    </th:block>
+<!--                                                    <th:block th:if="${content.user_send.userImg != null}">-->
+<!--                                                        <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.user_send.userImg}}">-->
+<!--                                                    </th:block>-->
 
-                                                <div class="text-main">
-                                                    <div class="text-group">
-                                                        <div class="text">
-                                                            <p th:text="${content.content}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <span th:text="${#dates.format(content.timeSend, 'HH:mm')}"></span>
-                                                </div>
-                                            </div>
-                                        </th:block>
+<!--                                                <div class="text-main">-->
+<!--                                                    <div class="text-group">-->
+<!--                                                        <div class="text">-->
+<!--                                                            <p th:text="${content.content}"></p>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <span th:text="${#dates.format(content.timeSend, 'HH:mm')}"></span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </th:block>-->
 
-                                        <th:block th:if="${content.user_send.id} == ${#request.userPrincipal.principal.id}">
-                                            <div class="message me">
-                                                <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.user_send.userImg}}">
+<!--                                        <th:block th:if="${content.user_send.id} == ${#request.userPrincipal.principal.id}">-->
+<!--                                            <div class="message me">-->
+<!--                                                <img class="avatar-img" alt="" th:src="@{'../../img/avatars/'+ ${content.user_send.userImg}}">-->
 
-                                                <div class="text-main">
-                                                    <div class="text-group me">
-                                                        <div class="text me">
-                                                            <p th:text="${content.content}"></p>
-                                                        </div>
-                                                    </div>
-                                                    <span th:text="${#dates.format(content.timeRead, 'HH:mm')}"></span>
-                                                </div>
-                                            </div>
-                                        </th:block>
-                                    </th:block>
-                                </div>
-                        </div>
-                    </div>
+<!--                                                <div class="text-main">-->
+<!--                                                    <div class="text-group me">-->
+<!--                                                        <div class="text me">-->
+<!--                                                            <p th:text="${content.content}"></p>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                    <span th:text="${#dates.format(content.timeRead, 'HH:mm')}"></span>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </th:block>-->
+<!--                                    </th:block>-->
+<!--                                </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
 
-                    <div class="bottom">
-                        <i class="fas fa-images"></i>
-                        <i class="fas fa-smile"></i>
-                        <div class="send-input w-100">
-                            <textarea id="content-chat" class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
-                        </div>
-                        <div class="send" style="padding: 10px;">
-                            <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>
-                        </div>
-                    </div>
-                </div>
+<!--                    <div class="bottom">-->
+<!--                        <i class="fas fa-images"></i>-->
+<!--                        <i class="fas fa-smile"></i>-->
+<!--                        <div class="send-input w-100">-->
+<!--                            <textarea id="content-chat" class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>-->
+<!--                        </div>-->
+<!--                        <div class="send" style="padding: 10px;">-->
+<!--                            <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
 
         </div>
@@ -197,8 +197,6 @@
 
 <th:block id="script">
     <script type="text/javascript">
-<!--          function scrollToBottom(el) { el.scrollTop = el.scrollHeight; }-->
-<!--          scrollToBottom(document.getElementById('content'));-->
         $(document).ready(function(){
         	getId();
 <!--        	send();-->
@@ -225,7 +223,7 @@
 <!--                       	console.log(data);-->
 <!--                     	getMessByIdCvt(getIdCvt);-->
 <!--							send(getIdCvt);-->
-                       	window.location = "/conversation/" + getIdCvt + "/mess";
+                       	window.location = "/conversation/" + getIdCvt + "/mess/" + id;
                     },
                     error: function(e) {
                         console.log("errors")

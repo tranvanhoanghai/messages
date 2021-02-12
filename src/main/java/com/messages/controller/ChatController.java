@@ -1,6 +1,7 @@
 package com.messages.controller;
 
 import com.messages.entity.Messengers;
+import com.messages.entity.User;
 import com.messages.repository.MessengersRepository;
 import com.messages.service.MessengersService;
 import com.messages.service.UserService;
@@ -35,11 +36,14 @@ public class ChatController {
         return "chat";
     }
 
-    @GetMapping("/conversation/{id}/mess")
-    public String getMessByIdConversation(@AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, @PathVariable(value = "id") Integer id, Model model){
+    @GetMapping("/conversation/{id}/mess/{idUser}")
+    public String getMessByIdConversation(@AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, @PathVariable(value = "id") Integer id,  @PathVariable(value = "idUser") Integer idUser, Model model){
         model.addAttribute("list",userService.getListExceptUserChat(userDetailServiceImpl.getId()));
         model.addAttribute("mess", messengersService.getAllMessByIdCvt(id));
-        return "chat";
+
+        User user =  userService.getUserById(idUser);
+        model.addAttribute("profile", user);
+        return "chatConversation";
     }
 
 //    @GetMapping("/conversation/add")

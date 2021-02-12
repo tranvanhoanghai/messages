@@ -27,11 +27,11 @@
                 <a class="nav-link" href="#" data-bs-toggle="dropdown">
 
                     <th:block th:if="${#request.userPrincipal.principal.userImg == null}">
-                        <img class="avatar-img" th:src="@{img/avatars/default.jpg}" alt="">
+                        <img class="avatar-img" th:src="@{/img/avatars/default.jpg}" alt="">
                     </th:block>
 
                     <th:block th:if="${#request.userPrincipal.principal.userImg != null}">
-                        <img class="avatar" th:src="@{'../../img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="">
+                        <img class="avatar" th:src="@{'/img/avatars/' + ${#request.userPrincipal.principal.userImg}}" alt="">
                     </th:block>
                 </a>
                 <ul class="dropdown-menu" style="z-index: 9;">

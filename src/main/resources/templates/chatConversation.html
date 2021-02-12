@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/main-layout :: main-fragment(
+                                                ~{:: title},
+                                                ~{:: #static-resources},
+                                                ~{:: #header},
+                                                ~{:: #main},
+                                                ~{:: #footer},
+                                                ~{:: #script}
+                                               )}">
+<head>
+    <title>Chat home</title>
+</head>
+<body>
+
+<header id="header" th:insert="~{/fragments/app-fragments :: nav-default}">
+    menu
+</header>
+
+<div class="chat" id="main">
+    <div class="container-fluid">
+        <div class="row">
+            <div class=" col-lg-4 col-xl-3">
+                <div class="sidebar" style="height: 90vh;">
+                    <div class="search">
+                        <form th:action="@{/chat}" method="post">
+                            <input type="text" class="form-control" name="key" placeholder="Search for conversations" required autofocus="off">
+                        </form>
+                    </div>
+
+                    <div class="content">
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" data-bs-toggle="pill" href="#all">All</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link"  data-bs-toggle="pill" href="#read">Read</a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link" data-bs-toggle="pill" href="#unread" >Unread</a>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="all">
+
+                                <div class="member" th:each="user : ${list}">
+                                    <a href="#" th:id="${user.id}" th:data-name="${user.lastName} +' '+ ${user.firstName}">
+                                        <th:block th:if="${user.userImg == null}">
+                                            <img class="avatar-img" alt="" src="/img/avatars/default.jpg" data-img="">
+                                        </th:block>
+
+                                        <th:block th:if="${user.userImg != null}">
+                                            <img class="avatar-img" th:src="@{'/img/avatars/' +${user.userImg}}" alt="" >
+                                        </th:block>
+
+                                        <div class="status">
+                                            <i class="fas fa-circle"></i>
+                                        </div>
+                                        <div class="data">
+                                            <h5 class="name" th:text="${user.lastName} +' '+ ${user.firstName}"></h5>
+                                            <!--                                            <span class="date-send read">Mon</span>-->
+                                            <!--                                            <p class="short-chat read">A new feature has been updated to your account. Check it out...</p>-->
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <!--                                <div class="member">-->
+                                <!--                                    <a href="#">-->
+                                <!--                                        <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">-->
+                                <!--                                        <div class="status">-->
+                                <!--                                            <i class="fas fa-circle active"></i>-->
+                                <!--                                        </div>-->
+                                <!--                                        <div class="data">-->
+                                <!--                                            <h5 class="name">Janette Dalton</h5>-->
+                                <!--                                            <span class="date-send">Mon</span>-->
+                                <!--                                            <p class="short-chat">A new feature has been updated to your account. Check it out...</p>-->
+                                <!--                                        </div>-->
+                                <!--                                    </a>-->
+                                <!--                                </div>-->
+
+                            </div>
+                            <div class="tab-pane fade" id="read">
+                                read
+                            </div>
+                            <div class="tab-pane fade" id="unread">
+                                unread
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=" col-lg-8 col-xl-9">
+                <div class="main-chat">
+                    <div class="top">
+                        <div class="col-md-12">
+                            <div class="inside" style="position: relative;">
+                                <a href="#">
+                                    <img class="avatar-img" id="img" th:src="@{'/img/avatars/' + ${profile.userImg}}" alt="">
+                                </a>
+                                <div class="status">
+                                    <i class="fas fa-circle"></i>
+                                </div>
+                                <div class="data">
+                                    <h5><a th:href="@{'/profile/' + ${profile.id}}" id="name">
+                                            <p th:text="${profile.lastName} +' '+ ${profile.firstName}"></p>
+                                        </a>
+                                    </h5>
+                                    <!--                                    <span>Active now</span>-->
+                                </div>
+                                <div class="btn-groups">
+                                    <button><i class="fas fa-phone-alt"></i></button>
+                                    <button><i class="fas fa-video"></i></button>
+                                    <div class="dropdown d-inline">
+                                        <button id="drop" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" style="margin: 0;"></i></button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li><button class="dropdown-item"><i class="fas fa-times"></i>Clear History</button></li>
+                                            <li><button class="dropdown-item"><i class="fas fa-times-circle"></i>Block Contact</button></li>
+                                            <li><button class="dropdown-item"><i class="fas fa-trash"></i>Delete Contact</button></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content" id="content">
+                        <div class="container-fuild">
+                            <div class="col-lg-12">
+                                <th:block th:unless="${#lists.isEmpty(mess)}" th:each="content : ${mess}">
+
+                                    <div class="date">
+                                        <hr>
+                                        <span th:text="${#dates.format(content.startTime, 'dd-MMM-yyyy')}"></span>
+                                        <hr>
+                                    </div>
+
+                                    <th:block th:if="${content.user_send.id} != ${#request.userPrincipal.principal.id}">
+                                        <div class="message">
+                                            <th:block th:if="${content.user_send.userImg == null}">
+                                                <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
+                                            </th:block>
+
+                                            <th:block th:if="${content.user_send.userImg != null}">
+                                                <img class="avatar-img" alt="" th:src="@{'/img/avatars/'+ ${content.user_send.userImg}}">
+                                            </th:block>
+
+                                            <div class="text-main">
+                                                <div class="text-group">
+                                                    <div class="text">
+                                                        <p th:text="${content.content}"></p>
+                                                    </div>
+                                                </div>
+                                                <span th:text="${#dates.format(content.timeSend, 'HH:mm')}"></span>
+                                            </div>
+                                        </div>
+                                    </th:block>
+
+                                    <th:block th:if="${content.user_send.id} == ${#request.userPrincipal.principal.id}">
+                                        <div class="message me">
+                                            <img class="avatar-img" alt="" th:src="@{'/img/avatars/'+ ${content.user_send.userImg}}">
+
+                                            <div class="text-main">
+                                                <div class="text-group me">
+                                                    <div class="text me">
+                                                        <p th:text="${content.content}"></p>
+                                                    </div>
+                                                </div>
+                                                <span th:text="${#dates.format(content.timeRead, 'HH:mm')}"></span>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bottom">
+                        <i class="fas fa-images"></i>
+                        <i class="fas fa-smile"></i>
+                        <div class="send-input w-100">
+                            <textarea id="content-chat" class="form-control" placeholder="Start typing for reply..." rows="1"></textarea>
+                        </div>
+                        <div class="send" style="padding: 10px;">
+                            <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <b id="id-login" class="d-none">[[${#request.userPrincipal.principal.id}]]</b>
+</div>
+<!--<div id="footer" align="center" th:replace="~{/fragments/app-fragments :: copyright}">-->
+<!--    Footer-->
+<!--</div>-->
+
+<th:block id="script">
+    <script type="text/javascript">
+
+        $(document).ready(function(){
+            function scrollToBottom(el) { el.scrollTop = el.scrollHeight; }
+            scrollToBottom(document.getElementById('content'));
+        	getId();
+<!--        	send();-->
+        });
+
+        function getId(){
+    		$('.member a').click(function(){
+    			var id = $(this).attr("id");
+
+    			var name = $(this).data('name');
+    			var img = $(this).find('img').attr('src');
+    			$("#name").text(name);
+    			$("#img").attr('src', img);
+
+
+                $.ajax({
+                    type: "GET",
+                    url: "/conversation/" + id,
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+
+                    success: function(data) {
+                        var getIdCvt = data.id;
+<!--                       	console.log(data);-->
+<!--                     	getMessByIdCvt(getIdCvt);-->
+<!--							send(getIdCvt);-->
+                       	window.location = "/conversation/" + getIdCvt + "/mess/" + id;
+                    },
+                    error: function(e) {
+                        console.log("errors")
+                        console.log(e)
+                    }
+                });
+            });
+        }
+
+<!--        function send(idCvt){-->
+<!--        	$(".send").click(function(){-->
+<!--        		var content = $("#content-chat").val();-->
+<!--        		var idUser = $("#id-login").text();-->
+<!--        		console.log();-->
+<!--        		$.ajax({-->
+<!--                    type: "GET",-->
+<!--                    url: "/conversation/add",-->
+<!--                    dataType: 'json',-->
+<!--                    data: JSON.stringify(content),-->
+<!--                    contentType: "application/json; charset=utf-8",-->
+
+<!--                    success: function(data) {-->
+<!--                    	console(data);-->
+
+<!--                    },-->
+<!--                    error: function(e) {-->
+<!--                        console.log("errorsssssss")-->
+<!--                        console.log(e)-->
+<!--                    }-->
+<!--                });-->
+<!--        	});-->
+<!--        }-->
+
+<!--        function getMessByIdCvt(id){-->
+<!--    		$.ajax({-->
+<!--                type: "get",-->
+<!--                url: "/conversation/" + id + "/mess",-->
+<!--                dataType: 'json',-->
+<!--                contentType: "application/json; charset=utf-8",-->
+<!--                data: {},-->
+<!--                success: function(data) {-->
+<!--					// window.history.pushState({}, "","/conversation/" + getIdCvt + "/mess");-->
+<!--                	for (var i = 0; i < data.length; i++) {-->
+<!--                	    console.log(data[i].id);-->
+<!--                	    console.log(data[i].user_send);-->
+<!--                	    console.log(data[i].cvt_id);-->
+<!--                	}-->
+<!--                },-->
+<!--                error: function(e) {-->
+<!--                    console.log(e)-->
+<!--                    console.log("errors 1")-->
+<!--                }-->
+<!--            });-->
+<!--    	}-->
+
+    </script>
+</th:block>
+</body>
+</html>
