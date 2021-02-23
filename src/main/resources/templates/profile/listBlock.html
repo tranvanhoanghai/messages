@@ -23,9 +23,9 @@
         <div class="row">
             <div class="col-md-3">
                 <ul>
-                    <li><a th:href="@{/profile/} + ${#request.userPrincipal.principal.id} + @{/edit}" class="active" >Edit Profile</a></li>
+                    <li><a th:href="@{/profile/} + ${#request.userPrincipal.principal.id} + @{/edit}" >Edit Profile</a></li>
                     <li><a th:href="@{/changePassword/} + ${#request.userPrincipal.principal.id} + @{/edit}" >Change Password</a></li>
-                    <li><a th:href="@{/listBlock/} + ${#request.userPrincipal.principal.id} + @{/edit}" >List Block</a></li>
+                    <li><a th:href="@{/listBlock/} + ${#request.userPrincipal.principal.id} + @{/edit}" class="active">List Block</a></li>
                 </ul>
             </div>
             <div class="col-md-9 info">

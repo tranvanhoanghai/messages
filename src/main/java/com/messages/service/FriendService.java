@@ -8,4 +8,5 @@ public interface FriendService {
     Integer countFriend(Integer id);
 
     Friend checkUserBlock(Integer friend_send, Integer friend_reply);
+    Friend checkUserStatus(Integer friend_send, Integer friend_reply);
 }

@@ -27,6 +27,11 @@ public class FriendServiceImpl implements FriendService {
       return friendRepository.checkFriendBlock(friend_send, friend_reply);
     }
 
+    @Override
+    public Friend checkUserStatus(Integer friend_send, Integer friend_reply) {
+        return friendRepository.checkStatus(friend_send, friend_reply);
+    }
+
 //    @Override
 //    public Friend checkFriends(Integer friend_send, Integer friend_reply) {
 //        Friend friend = friendRepository.checkFriend(friend_send, friend_reply);

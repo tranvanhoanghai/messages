@@ -2,6 +2,7 @@ package com.messages.controller;
 
 import com.messages.entity.Friend;
 import com.messages.entity.User;
+import com.messages.repository.FriendRepository;
 import com.messages.repository.UserRepository;
 import com.messages.service.FriendService;
 import com.messages.service.UserService;
@@ -35,6 +36,9 @@ public class UserController {
     @Autowired
     private FriendService friendService;
 
+    @Autowired
+    private FriendRepository friendRepository;
+
     @Value("${upload.path}")
     private String fileUpload;
 
@@ -42,6 +46,8 @@ public class UserController {
     public String view(@PathVariable(value = "id") Integer id, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, Model model )
     {
         User user =  userService.getUserById(id);
+        Friend status = friendService.checkUserStatus(id, userDetailServiceImpl.getId());
+
         model.addAttribute("count", friendService.countFriend(id));
         model.addAttribute("profile", user);
 
@@ -52,14 +58,22 @@ public class UserController {
             if(check != null){
                 return "profile/block";
             }
+            model.addAttribute("status", status);
+            model.addAttribute("friend", new Friend());
+            model.addAttribute("update", friendRepository.findById(status.getId()));
             return "profile/profileFriend";
         }
     }
 
     @GetMapping("/{id}/edit") // get id profile user edit
-    public String edit(@PathVariable(value = "id") Integer id, Model model){
-        model.addAttribute("edit", userRepository.findById(id));
-        return "profile/edit";
+    public String edit(@PathVariable(value = "id") Integer id, Model model,  @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl)
+    {
+        if(id.equals(userDetailServiceImpl.getId())){
+            model.addAttribute("edit", userRepository.findById(id));
+            return "profile/edit";
+        }else{
+            return "404";
+        }
     }
 
     @PostMapping("/{id}/edit") // update profile user
@@ -76,6 +90,7 @@ public class UserController {
         }
         return "profile/edit";
     }
+
     @PostMapping("/upload/{id}")
     public RedirectView saveUser(@PathVariable(value = "id") Integer id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
@@ -88,6 +103,5 @@ public class UserController {
         }
         userService.uploadUserImg(fileName, id);
         return new RedirectView("/profile/{id}", true);
-
     }
 }

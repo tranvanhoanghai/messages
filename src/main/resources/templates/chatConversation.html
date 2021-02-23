@@ -48,7 +48,7 @@
                                 <div class="member" th:each="user : ${list}">
                                     <a href="#" th:id="${user.id}" th:data-name="${user.lastName} +' '+ ${user.firstName}">
                                         <th:block th:if="${user.userImg == null}">
-                                            <img class="avatar-img" alt="" src="/img/avatars/default.jpg" data-img="">
+                                            <img class="avatar-img" alt="" src="/img/avatars/default.jpg">
                                         </th:block>
 
                                         <th:block th:if="${user.userImg != null}">
@@ -97,15 +97,21 @@
                     <div class="top">
                         <div class="col-md-12">
                             <div class="inside" style="position: relative;">
-                                <a href="#">
-                                    <img class="avatar-img" id="img" th:src="@{'/img/avatars/' + ${profile.userImg}}" alt="">
-                                </a>
+
+                                <th:block th:if="${user.userImg == null}">
+                                    <img class="avatar-img" alt="" src="/img/avatars/default.jpg">
+                                </th:block>
+
+                                <th:block th:if="${user.userImg != null}">
+                                    <img class="avatar-img" id="img" th:src="@{'/img/avatars/' + ${user.userImg}}" alt="">
+                                </th:block>
+
                                 <div class="status">
                                     <i class="fas fa-circle"></i>
                                 </div>
                                 <div class="data">
-                                    <h5><a th:href="@{'/profile/' + ${profile.id}}" id="name">
-                                            <p th:text="${profile.lastName} +' '+ ${profile.firstName}"></p>
+                                    <h5><a th:href="@{'/profile/' + ${user.id}}" id="name">
+                                            <p th:text="${user.lastName} +' '+ ${user.firstName}"></p>
                                         </a>
                                     </h5>
                                     <!--                                    <span>Active now</span>-->
@@ -140,7 +146,7 @@
                                     <th:block th:if="${content.user_send.id} != ${#request.userPrincipal.principal.id}">
                                         <div class="message">
                                             <th:block th:if="${content.user_send.userImg == null}">
-                                                <img class="avatar-img" alt="" src="../../img/avatars/default.jpg">
+                                                <img class="avatar-img" alt="" src="/img/avatars/default.jpg">
                                             </th:block>
 
                                             <th:block th:if="${content.user_send.userImg != null}">

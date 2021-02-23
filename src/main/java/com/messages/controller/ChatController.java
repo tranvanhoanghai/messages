@@ -42,7 +42,7 @@ public class ChatController {
         model.addAttribute("mess", messengersService.getAllMessByIdCvt(id));
 
         User user =  userService.getUserById(idUser);
-        model.addAttribute("profile", user);
+        model.addAttribute("user", user);
         return "chatConversation";
     }
 

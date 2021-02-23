@@ -511,7 +511,7 @@ main .main-chat .bottom i {
     padding: 0;
 }
 
-.profile .info ul li {
+.profile .info .count ul li {
     display: inline-block;
     margin: 0 20px;
     font-size: 16px;
@@ -579,6 +579,14 @@ main .main-chat .bottom i {
 
 .edit-profile .form-group{
     margin-bottom: 1rem;
+}
+
+.edit-profile ul li a{
+    color:black;
+}
+
+.edit-profile ul li a.active{
+    color:blue;
 }
 
 
