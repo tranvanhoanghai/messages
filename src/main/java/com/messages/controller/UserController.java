@@ -42,11 +42,14 @@ public class UserController {
     @Value("${upload.path}")
     private String fileUpload;
 
+
+
+
     @GetMapping("/{id}") // profile user
     public String view(@PathVariable(value = "id") Integer id, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, Model model )
     {
         User user =  userService.getUserById(id);
-        Friend status = friendService.checkUserStatus(id, userDetailServiceImpl.getId());
+        Friend status = friendService.checkFriendStatus(id, userDetailServiceImpl.getId());
 
         model.addAttribute("count", friendService.countFriend(id));
         model.addAttribute("profile", user);
@@ -54,13 +57,13 @@ public class UserController {
         if(id.equals(userDetailServiceImpl.getId())){
             return "profile/profile";
         }else{
-            Friend check = friendService.checkUserBlock(id, userDetailServiceImpl.getId());
-            if(check != null){
+//            Friend check = friendService.checkUserBlock(id, userDetailServiceImpl.getId());
+            if(status.getStatus() == 3){
                 return "profile/block";
             }
-            model.addAttribute("status", status);
-            model.addAttribute("friend", new Friend());
-            model.addAttribute("update", friendRepository.findById(status.getId()));
+            model.addAttribute("status", status);                                    // show status friend
+            model.addAttribute("friend", new Friend());                              // add status friend
+            model.addAttribute("update", friendRepository.findById(status.getId())); // update status friend
             return "profile/profileFriend";
         }
     }
@@ -91,7 +94,7 @@ public class UserController {
         return "profile/edit";
     }
 
-    @PostMapping("/upload/{id}")
+    @PostMapping("/upload/{id}") // upload img user
     public RedirectView saveUser(@PathVariable(value = "id") Integer id, @RequestParam("image") MultipartFile multipartFile) throws IOException {
 
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());

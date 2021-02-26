@@ -29,76 +29,22 @@
                 </ul>
             </div>
             <div class="col-md-9 info">
-                <form th:action="@{/profile/} + ${#request.userPrincipal.principal.id} + @{/edit}" th:object="${edit}" method="post" enctype="multipart/form-data">
 
+                <th:block th:if="${#lists.isEmpty(listBlock)}">
+                    <h5>No Block List </h5>
+                </th:block>
 
-                    <div th:if="${isExist}" class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <strong class="errors" th:text="${isExist}"></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <th:block th:unless="${#lists.isEmpty(listBlock)}">
+                    <div th:each="block : ${listBlock}">
+                        <span th:text="${block.friend_reply.lastName} +' '+ ${block.friend_reply.firstName}"></span>
+                        <span th:text="${block.id}"></span>
+                        <form th:action="@{/cancelFriend/} + ${block.id}" th:object="${update}" method="post" style="display:inline">
+                            <input type="hidden" name="friend_send" th:value="${block.friend_send.id}"/>
+                            <input type="hidden" name="friend_reply" th:value="${block.friend_reply.id}"/>
+                            <button class="btn btn-outline-primary"> Bỏ chặn</button>
+                        </form>
                     </div>
-
-                    <div th:if="${success}" class="alert alert-success alert-dismissible fade show" role="alert">
-                        <strong class="errors" th:text="${success}"></strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-
-                    <input type="hidden" th:field="*{id}"/>
-                    <input type="hidden" th:field="*{password}"/>
-                    <input type="hidden" th:field="*{username}"/>
-                    <input type="hidden" th:field="*{userImg}"/>
-
-                    <div class="row">
-                        <div class="form-group col">
-                            <label class="form-label">
-                                Last Name
-                            </label>
-                            <input type="text" th:field="*{lastName}" class="form-control"
-                                   placeholder="Last Name"  autocomplete="off" >
-                            <span class="errors" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
-                        </div>
-
-                        <div class="form-group col">
-                            <label class="form-label">
-                                 First Name
-                            </label>
-                            <input type="text" th:field="*{firstName}" class="form-control"
-                                   placeholder="First Name"  autocomplete="off" >
-                            <span class="errors" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="form-group col">
-                            <label class="form-label">
-                                Email
-                            </label>
-                            <input type="email" th:field="*{email}" class="form-control"
-                                   placeholder="Email"  autocomplete="off" >
-                            <span class="errors" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
-                        </div>
-
-                        <div class="form-group col">
-                            <label class="form-label">
-                                Date of birth
-                            </label>
-                            <input type="date" th:field="*{dateOfBirth}" class="form-control"
-                                   placeholder="Date of birth"  autocomplete="off" >
-                            <span class="errors" th:if="${#fields.hasErrors('dateOfBirth')}" th:errors="*{dateOfBirth}"></span>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Gender
-                        </label>
-                        <select class="form-control" th:field="*{gender}">
-                            <option th:value="0" th:text="Male"></option>
-                            <option th:value="1" th:text="Female"></option>
-                        </select>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary button">Update</button>
-                </form>
+                </th:block>
             </div>
         </div>
     </div>

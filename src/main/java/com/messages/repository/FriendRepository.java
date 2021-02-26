@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 
 @Repository
 public interface FriendRepository extends JpaRepository<Friend, Integer> {
@@ -25,15 +27,21 @@ public interface FriendRepository extends JpaRepository<Friend, Integer> {
     Integer countFriend(@Param("idUser") Integer idUser);
 
     // Check user block
-    @Query(value = "select * " +
-            " from Friend f " +
-            " where ((f.friend_send = :friend_send and f.friend_reply = :friend_reply) or (f.friend_send = :friend_reply and f.friend_reply = :friend_send)) and f.status = 3 ", nativeQuery = true)
-    Friend checkFriendBlock(@Param("friend_send") Integer friend_send, @Param("friend_reply") Integer friend_reply);
+//    @Query(value = "select * " +
+//            " from Friend f " +
+//            " where ((f.friend_send = :friend_send and f.friend_reply = :friend_reply) or (f.friend_send = :friend_reply and f.friend_reply = :friend_send)) and f.status = 3 ", nativeQuery = true)
+//    Friend checkFriendBlock(@Param("friend_send") Integer friend_send, @Param("friend_reply") Integer friend_reply);
 
     // Check user block
     @Query(value = "select * " +
             " from Friend f " +
             " where (f.friend_send = :friend_send and f.friend_reply = :friend_reply) or (f.friend_send = :friend_reply and f.friend_reply = :friend_send)", nativeQuery = true)
     Friend checkStatus(@Param("friend_send") Integer friend_send, @Param("friend_reply") Integer friend_reply);
+
+    // List user block
+    @Query(value = "select * " +
+            " from Friend f " +
+            " where f.friend_send = :friend_send and f.status = 3", nativeQuery = true)
+    List<Friend> listBlock(@Param("friend_send") Integer friend_send);
 
 }

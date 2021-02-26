@@ -51,7 +51,7 @@
                 <div class="edit">
 
                     <th:block th:if="${#lists.isEmpty(status)}">
-                        <form th:action="@{/addFriend/} + ${profile.id}" th:object="${friend}" method="post">
+                        <form th:action="@{/addFriend/} + ${profile.id}" th:object="${friend}" method="post" style="display:inline">
                             <input type="hidden" th:value="${profile.id}" id="friend_reply" name="friend_reply" />
                             <input type="hidden" th:value="${#request.userPrincipal.principal.id}" id="friend_send" name="friend_send"/>
                             <button class="btn btn-primary"> Gửi kết bạn </button>
@@ -61,7 +61,7 @@
                     <th:block th:unless="${#lists.isEmpty(status)}">
                         <th:block th:switch="${status.status}">
                             <th:block th:case="0">
-                                <form th:action="@{/addFriends/} + ${profile.id}" th:object="${update}" method="post">
+                                <form th:action="@{/addFriends/} + ${profile.id}" th:object="${update}" method="post" style="display:inline">
                                     <input type="hidden" th:field="*{id}"/>
                                     <input type="hidden" th:field="*{friend_send}"/>
                                     <input type="hidden" th:field="*{friend_reply}"/>
@@ -71,7 +71,7 @@
 
                             <th:block th:case="1">
                                 <th:block th:if="${status.friend_send.id} == ${#request.userPrincipal.principal.id}">
-                                    <form th:action="@{/cancelFriend/} + ${profile.id}" th:object="${update}" method="post">
+                                    <form th:action="@{/cancelFriend/} + ${profile.id}" th:object="${update}" method="post" style="display:inline">
                                         <input type="hidden" th:field="*{id}"/>
                                         <input type="hidden" th:field="*{friend_send}"/>
                                         <input type="hidden" th:field="*{friend_reply}"/>
@@ -80,7 +80,7 @@
                                 </th:block>
 
                                 <th:block th:if="${status.friend_send.id} != ${#request.userPrincipal.principal.id}">
-                                    <form th:action="@{/confirmFriend/} + ${profile.id}" th:object="${update}" method="post">
+                                    <form th:action="@{/confirmFriend/} + ${profile.id}" th:object="${update}" method="post" style="display:inline">
                                         <input type="hidden" th:field="*{id}"/>
                                         <input type="hidden" th:field="*{friend_send}"/>
                                         <input type="hidden" th:field="*{friend_reply}"/>

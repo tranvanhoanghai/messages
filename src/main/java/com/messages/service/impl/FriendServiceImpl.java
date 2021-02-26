@@ -6,6 +6,8 @@ import com.messages.service.FriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class FriendServiceImpl implements FriendService {
 
@@ -22,14 +24,19 @@ public class FriendServiceImpl implements FriendService {
         return friendRepository.countFriend(id);
     }
 
+//    @Override
+//    public Friend checkUserBlock(Integer friend_send, Integer friend_reply) {
+//      return friendRepository.checkFriendBlock(friend_send, friend_reply);
+//    }
+
     @Override
-    public Friend checkUserBlock(Integer friend_send, Integer friend_reply) {
-      return friendRepository.checkFriendBlock(friend_send, friend_reply);
+    public Friend checkFriendStatus(Integer friend_send, Integer friend_reply) {
+        return friendRepository.checkStatus(friend_send, friend_reply);
     }
 
     @Override
-    public Friend checkUserStatus(Integer friend_send, Integer friend_reply) {
-        return friendRepository.checkStatus(friend_send, friend_reply);
+    public List<Friend> ListUserBlock(Integer id_friend_send) {
+        return friendRepository.listBlock(id_friend_send);
     }
 
 //    @Override
