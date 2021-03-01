@@ -58,4 +58,6 @@ public class ChatController {
 //    public List<Messengers> getMessByIdConversations(@PathVariable(value = "id") Integer id){
 //        return  messengersService.getAllMessByIdCvt(id);
 //    }
+
+
 }

@@ -52,7 +52,7 @@ public class UserServiceImpl implements com.messages.service.UserService {
         if(optional.isPresent()){
             user = optional.get();
         }else{
-            throw new RuntimeException("Employee not found for id : " + id);
+            throw new RuntimeException("User not found for id : " + id);
         }
         return user;
     }
