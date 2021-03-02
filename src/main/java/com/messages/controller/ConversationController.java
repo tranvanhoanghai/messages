@@ -1,7 +1,6 @@
 package com.messages.controller;
 
 import com.messages.entity.Conversation;
-import com.messages.repository.MessengersRepository;
 import com.messages.service.ConversationService;
 import com.messages.service.FriendService;
 import com.messages.service.impl.UserDetailServiceImpl;

@@ -1,8 +1,6 @@
 package com.messages.controller;
 
-import com.messages.entity.Messengers;
 import com.messages.entity.User;
-import com.messages.repository.MessengersRepository;
 import com.messages.service.MessengersService;
 import com.messages.service.UserService;
 import com.messages.service.impl.UserDetailServiceImpl;

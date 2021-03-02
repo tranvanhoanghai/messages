@@ -22,74 +22,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class=" col-lg-4 col-xl-3">
-                <div class="sidebar" style="height: 90vh;">
-                    <div class="search">
-                        <form th:action="@{/chat}" method="post">
-                            <input type="text" class="form-control" name="key" placeholder="Search for conversations" required autofocus="off">
-                        </form>
-                    </div>
-
-                    <div class="content">
-                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link active" data-bs-toggle="pill" href="#all">All</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link"  data-bs-toggle="pill" href="#read">Read</a>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <a class="nav-link" data-bs-toggle="pill" href="#unread" >Unread</a>
-                            </li>
-                        </ul>
-
-                        <div class="tab-content" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="all">
-
-                                <div class="member" th:each="group : ${listGroup}">
-                                    <a th:href="@{/group/} + ${group.id} + @{/mess}" th:id="${group.id}">
-                                        <th:block th:if="${group.groupImg == null}">
-                                            <img class="avatar-img" alt="" src="/img/avatars/default.jpg" data-img="">
-                                        </th:block>
-
-                                        <th:block th:if="${group.groupImg != null}">
-                                            <img class="avatar-img" th:src="@{'/img/avatars/' +${group.groupImg}}" alt="" >
-                                        </th:block>
-
-                                        <div class="status">
-                                            <i class="fas fa-circle"></i>
-                                        </div>
-                                        <div class="data">
-                                            <h5 class="name" th:text="${group.groupName}"></h5>
-                                            <!--                                            <span class="date-send read">Mon</span>-->
-                                            <!--                                            <p class="short-chat read">A new feature has been updated to your account. Check it out...</p>-->
-                                        </div>
-                                    </a>
-                                </div>
-
-                                <!--                                <div class="member">-->
-                                <!--                                    <a href="#">-->
-                                <!--                                        <img class="avatar-img" src="img/avatars/avatar-female-1.jpg" alt="">-->
-                                <!--                                        <div class="status">-->
-                                <!--                                            <i class="fas fa-circle active"></i>-->
-                                <!--                                        </div>-->
-                                <!--                                        <div class="data">-->
-                                <!--                                            <h5 class="name">Janette Dalton</h5>-->
-                                <!--                                            <span class="date-send">Mon</span>-->
-                                <!--                                            <p class="short-chat">A new feature has been updated to your account. Check it out...</p>-->
-                                <!--                                        </div>-->
-                                <!--                                    </a>-->
-                                <!--                                </div>-->
-
-                            </div>
-                            <div class="tab-pane fade" id="read">
-                                read
-                            </div>
-                            <div class="tab-pane fade" id="unread">
-                                unread
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div th:replace="groupChats/groupChat :: sidebar"></div>
             </div>
 
             <div class=" col-lg-8 col-xl-9">
@@ -111,7 +44,6 @@
                                 </div>
                                 <div class="data">
                                     <h5 th:text="${group.groupName}"></h5>
-                                    <!--                                    <span>Active now</span>-->
                                 </div>
                                 <div class="btn-groups">
                                     <button><i class="fas fa-phone-alt"></i></button>
@@ -119,9 +51,9 @@
                                     <div class="dropdown d-inline">
                                         <button id="drop" data-bs-toggle="dropdown"><i class="fas fa-ellipsis-v" style="margin: 0;"></i></button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li><button class="dropdown-item"><i class="fas fa-times"></i>Clear History</button></li>
-                                            <li><button class="dropdown-item"><i class="fas fa-times-circle"></i>Block Contact</button></li>
-                                            <li><button class="dropdown-item"><i class="fas fa-trash"></i>Delete Contact</button></li>
+                                            <li data-bs-toggle="modal" data-bs-target="#changeNameGroup"><button class="dropdown-item"><i class="fas fa-file-signature"></i>Change name group</button></li>
+                                            <li data-bs-toggle="modal" data-bs-target="#changeImage"><button class="dropdown-item"><i class="fas fa-images"></i>Change image</button></li>
+                                            <li data-bs-toggle="modal" data-bs-target="#viewMember"><button class="dropdown-item"><i class="fas fa-users"></i>View member</button></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -192,11 +124,81 @@
                             <button class="btn btn-primary"><i class="fas fa-paper-plane" style="color: white;"></i></button>
                         </div>
                     </div>
+
                 </div>
             </div>
-
         </div>
     </div>
+
+    <!-- Modal change name group -->
+    <div class="modal" id="changeNameGroup" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change name group</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form th:action="@{/group/update/} + ${group.id}" th:object="${updateGroup}" method="post">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="groupName" class="form-label">Name Group</label>
+                            <input type="hidden" th:field="*{groupImg}">
+                            <input type="text" class="form-control"  placeholder="name group" name="groupName" th:value="${group.groupName}" required autofocus>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal change Image -->
+    <div class="modal" id="changeImage" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form  th:action="@{/group/upload/} + ${group.id}" th:object="${updateGroup}" method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label class="form-label">Image: </label>
+                            <input type="hidden" th:field="*{groupName}">
+                            <input  class="form-control"  type="file" name="image" accept="image/png, image/jpeg" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal view Member-->
+    <div class="modal fade" id="viewMember" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">View member</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 

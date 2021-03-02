@@ -25,6 +25,7 @@ public interface UserRepository extends JpaRepository<User, Integer>
     // search user
     List<User> findByFirstName(String key);
 
+    // update img
     @Transactional
     @Modifying
     @Query(value = "UPDATE User u set user_img = :userImg where u.id = :userId", nativeQuery = true)

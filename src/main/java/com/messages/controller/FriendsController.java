@@ -3,7 +3,6 @@ package com.messages.controller;
 import com.messages.entity.Friend;
 import com.messages.entity.User;
 import com.messages.repository.FriendRepository;
-import com.messages.repository.UserRepository;
 import com.messages.service.FriendService;
 import com.messages.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
