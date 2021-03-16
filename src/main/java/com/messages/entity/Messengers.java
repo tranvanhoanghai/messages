@@ -2,6 +2,7 @@ package com.messages.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 
@@ -17,11 +18,18 @@ import java.util.Date;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Messengers extends BaseEntity
 {
-    @ManyToOne
-    @JoinColumn(name = "user_send")
-    private User user_send;
+
+    @Column(name= "user_send")
+    private Integer id_user_send;
 
     @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "user_send", insertable = false, updatable = false)
+    private User user_send;
+
+
+    @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "cvt_id")
     private Conversation cvt_id;
 
@@ -40,6 +48,14 @@ public class Messengers extends BaseEntity
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false, length = 1)
-    private String isRead;
+    @Column()
+    private Integer isRead;
+
+    @Override
+    public String toString() {
+        return "Messengers{" +
+                "id_user_send=" + id_user_send +
+                ", content='" + content + '\'' +
+                '}';
+    }
 }

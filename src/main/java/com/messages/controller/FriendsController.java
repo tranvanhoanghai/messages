@@ -6,6 +6,7 @@ import com.messages.repository.FriendRepository;
 import com.messages.service.FriendService;
 import com.messages.service.impl.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +49,19 @@ public class FriendsController {
     }
 
     @PostMapping("/cancelFriend/{id}") // Huỷ kết bạn
-    public String cancelFriend(@PathVariable(value = "id") Integer id, @ModelAttribute("update") Friend friend){
-        friend.setStatus(0);
+    public String cancelFriend(@PathVariable(value = "id") Integer id, @ModelAttribute("update") Friend friend, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl){
+        Optional<Friend> status = friendRepository.findById(friend.getId());
+
+        // nếu user Huỷ là user_send thì update status = 0, nếu không thì hoán đổi vị trí 2 user
+        if(status.get().getFriend_send().getId().equals(userDetailServiceImpl.getId()))
+        {
+            friend.setStatus(0);
+        }else{
+            friend.setStatus(0);
+            User user_send = friend.getFriend_send(); // biến tạm để hoán đổi
+            friend.setFriend_send(friend.getFriend_reply());
+            friend.setFriend_reply(user_send);
+        }
         friendRepository.save(friend);
         return "redirect:/profile/{id}";
     }
@@ -83,12 +95,13 @@ public class FriendsController {
         }
     }
 
-    @PostMapping("/unBlock/{id}") // Bỏ chặn
-    public String unBlock(@PathVariable(value = "id") Integer id, @ModelAttribute("update") Friend friend){
+    @PostMapping("/unBlock/{id}/{idUser}") // Bỏ chặn
+    public String unBlock(@PathVariable(value = "id") Integer id, @PathVariable(value = "idUser") Integer idUser, @ModelAttribute("update") Friend friend){
         friend.setId(id);
         friend.setStatus(0);
         friendRepository.save(friend);
-        return "redirect:/profile";
+
+        return "redirect:/listBlock/{idUser}/edit/";
     }
 
 }

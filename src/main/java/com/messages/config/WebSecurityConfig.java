@@ -50,6 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .antMatchers("/login").permitAll()      // không check authen trên link "login"
                 .antMatchers(
                         "/sign-up**",
+                        "/forgot**",
+                        "/reset**",
                         "/js/**",
                         "/css/**",
                         "/img/**").permitAll()
@@ -73,8 +75,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .exceptionHandling()
                 .accessDeniedPage("/403")
                 .and()
-            .rememberMe().tokenRepository(this.persistentTokenRepository()) //
-                .tokenValiditySeconds(1 * 24 * 60 * 60); // 24h
+                .rememberMe()
+                .tokenValiditySeconds(604800)//luu trong 7 ngay
+                .userDetailsService(userService);
+
 //           .rememberMe()
 //                .key("rem-me-key")
 //                .rememberMeParameter("remember") // it is name of checkbox at login page

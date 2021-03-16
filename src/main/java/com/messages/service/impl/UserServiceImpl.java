@@ -6,6 +6,7 @@ import com.messages.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -35,10 +36,6 @@ public class UserServiceImpl implements com.messages.service.UserService {
         return userRepository.listExceptUserChat(exceptUsername);
     }
 
-    @Override
-    public List<User> searchUser(String key) {
-        return userRepository.findByFirstName(key);
-    }
 
     @Override
     public void uploadUserImg(String img, Integer id) {
@@ -56,4 +53,46 @@ public class UserServiceImpl implements com.messages.service.UserService {
         }
         return user;
     }
+
+    public void updateResetPasswordToken(String token, String email) throws UserNotFoundException{
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+        } else {
+            throw new UserNotFoundException("Could not find any user with the email " + email);
+        }
+    }
+
+    public void updatePassword(String token, String newPassword) throws UserNotFoundException{
+        User user = userRepository.findByResetPasswordToken(token);
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        if (user != null) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            user.setResetPasswordToken(null);
+            userRepository.save(user);
+        } else {
+            throw new UserNotFoundException("Invalid token!");
+        }
+    }
+
+    public User getByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    @Override
+    public void changePassword(Integer id, String newPassword, String oldPassword) throws UserNotFoundException {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//      String encodedPassword = passwordEncoder.encode(newPassword);
+        User user = userRepository.findByUserId(id);
+        if(user != null && passwordEncoder.matches(oldPassword, user.getPassword())==true) {
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+        }else {
+            throw new UserNotFoundException("Old password incorrect!");
+        }
+    }
+
+
+
 }

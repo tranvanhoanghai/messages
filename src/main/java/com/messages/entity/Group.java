@@ -16,7 +16,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Group extends BaseEntity
 {
     @Column(nullable = false)
@@ -26,7 +26,7 @@ public class Group extends BaseEntity
     private String groupImg;
 
     @OneToMany(mappedBy = "group_id", cascade = CascadeType.ALL)
-    private List<GroupUser> groupUsers = new ArrayList<>();
+    private List<GroupUser> groupUsers;
 
     @OneToMany(mappedBy = "group_id", cascade = CascadeType.ALL)
     private List<MessGroup> messGroups = new ArrayList<>();

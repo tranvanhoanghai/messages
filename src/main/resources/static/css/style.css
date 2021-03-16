@@ -6,6 +6,13 @@ ul {
     list-style: none;
 }
 
+.form-control:focus{
+    border-color:none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline:none !important;
+}
+
 body {
 
     --background-color: #fff;
@@ -206,6 +213,11 @@ main .sidebar .content .member a {
     overflow: hidden;
 }
 
+main .sidebar .content .member .active {
+    border-bottom: 2px solid #2196F3;
+    border-radius: 10px;
+}
+
 .avatar-img {
     width: 100%;
     height: 45px;
@@ -380,6 +392,7 @@ main .main-chat .content .date {
     align-items: center;
     justify-content: center;
     color: var(--text-color-black);
+    height:0;
 }
 
 main .main-chat .content .message {
@@ -388,6 +401,7 @@ main .main-chat .content .message {
     -ms-flex-align: end;
     align-items: flex-end;
     width: 100%;
+    margin-top: 20px;
 }
 
 main .main-chat .content .message span{
@@ -400,7 +414,8 @@ main .main-chat .content .message .text {
     padding: 10px;
     max-width: 450px;
     background: var(--input-bg);
-    border-radius: 6px;
+    border-radius: 30px;
+    word-break: break-word;
 }
 
 main .main-chat .content .message.me {
@@ -418,7 +433,7 @@ main .main-chat .content .message .text-group.me {
 }
 
 main .main-chat .content .message .text.me {
-    background: #2196F3;
+    background: #7269efF3;
     -moz-transition: all .3s;
     -webkit-transition: all .3s;
     transition: all .3s;
@@ -434,6 +449,7 @@ main .main-chat .content .message.me span {
     text-align: right;
     display: block;
 }
+
 
 main .main-chat .bottom {
     padding: 20px;
@@ -457,8 +473,77 @@ main .main-chat .bottom .send-input textarea::-webkit-scrollbar {
 main .main-chat .bottom i {
     font-size: 30px;
     color: #bdbac2;
-    margin-right: 15px;
     cursor: pointer;
+}
+
+#icon li{
+    display:inline-block;
+    font-size:20px;
+    cursor:pointer;
+}
+
+/* CSS modal grouphtml*/
+
+main #viewMember .modal-body .col-md-8{
+    padding:10px !important;
+    overflow-y:auto;
+}
+
+main #viewMember .modal-body .col-md-8::-webkit-scrollbar {
+    width: 5px;
+}
+
+main #viewMember .modal-body .col-md-8::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+main #viewMember .modal-body .col-md-8::-webkit-scrollbar-thumb {
+    background: #2092ec;
+}
+
+main #viewMember .modal-body .col-md-8::-webkit-scrollbar-thumb:hover {
+    background: red;
+}
+main #viewMember .modal-body .member{
+    display: flex;
+    align-items: center;
+    margin-top:10px;
+    margin-right:10px
+}
+
+
+main #viewMember .modal-body .search input{
+    width:100%;
+    padding:10px;
+    background: var(--input-bg);
+    border:none;
+}
+
+main #viewMember .modal-body .list-search{
+    margin-top:20px;
+}
+
+main #viewMember .modal-body .list-search .result-search{
+    margin-top:20px;
+    display: flex;
+    align-items: center;
+}
+
+main #viewMember .modal-body .list-search .result-search .name-add{
+    width:100%;
+}
+
+main #viewMember .modal-body .list-search .result-search .name-add button{
+    float: right;
+}
+
+main #viewMember .modal-body .list-search .result-search img{
+    width: 100%;
+    height: 45px;
+    min-width: 45px;
+    max-width: 45px;
+    border-radius:100%;
+    margin-right:10px
 }
 
 
@@ -590,6 +675,39 @@ main .main-chat .bottom i {
 .profile .main .post .post-item{
     margin-bottom: 20px;
     height: 300px;
+}
+
+.profile .main #showPost .modal-header .avatar-img{
+    height: 30px;
+    min-width: 30px;
+    max-width: 30px;
+}
+
+.profile .main #showPost .modal-header .modal-title{
+   font-size:15px;
+}
+
+.profile .main #showPost .modal-footer input{
+    width:100%;
+    padding:10px;
+    outline:none;
+    border:none;
+    border-bottom:1px solid;
+}
+
+.profile .main #showPost .modal-footer{
+    justify-content: flex-start;
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        padding: 0;ẽ}
+
+
+
+.profile .main #showPost .modal-footer #post-date{
+    font-size: 10px;
+    color: #bdbac2;
+    text-transform: uppercase;
 }
 
 

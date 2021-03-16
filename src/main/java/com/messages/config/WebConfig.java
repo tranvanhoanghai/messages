@@ -15,6 +15,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        exposeDirectory("posts", registry);
         registry.addResourceHandler(
                 "/webjars/**",
                 "/img/**",
@@ -25,5 +26,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                         "classpath:/static/img/",
                         "classpath:/static/css/",
                         "classpath:/static/js/");
+    }
+
+    private void exposeDirectory(String dirName, ResourceHandlerRegistry registry) {
+        Path uploadDir = Paths.get(dirName);
+        String uploadPath = uploadDir.toFile().getAbsolutePath();
+
+        if (dirName.startsWith("../")) dirName = dirName.replace("../", "");
+
+        registry.addResourceHandler("/" + dirName + "/**").addResourceLocations("file:/"+ uploadPath + "/");
+
     }
 }

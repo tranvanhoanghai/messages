@@ -39,6 +39,7 @@ public class UserRegistrationController
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
+            user.setUserImg("default.jpg");
 
             userService.saveReg(user);
         }catch (Exception e){

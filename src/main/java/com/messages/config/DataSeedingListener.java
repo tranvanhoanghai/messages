@@ -59,6 +59,7 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
             user.setUsername("hai");
             user.setFirstName("Hoàng");
             user.setLastName("Văn");
+            user.setUserImg("default.jpg");
             user.setEmail("hai@gmail.com");
             user.setPassword(passwordEncoder.encode("123456"));
 //            HashSet<Role> roles = new HashSet<>();

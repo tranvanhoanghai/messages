@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.messaging.simp.stomp.StompHeaderAccessor;
-import org.springframework.stereotype.Component;
 import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 
@@ -30,14 +29,7 @@ public class WebSocketEventListener {
     @EventListener
     public void handleWebSocketDisconnectListener(SessionDisconnectEvent event) {
         StompHeaderAccessor headerAccessor = StompHeaderAccessor.wrap(event.getMessage());
-
-        User user = (User) headerAccessor.getSessionAttributes().get("username");
-        if(user != null) {
-            logger.info("User Disconnected : " + user);
-
-            Messengers messengers = new Messengers();
-            messengers.setUser_send(user);
-            messagingTemplate.convertAndSend("/topic/public", messengers);
-        }
+        String sessionId = headerAccessor.getSessionId();
+        logger.info("Chat connection by user <{}> with sessionId <{}>", "Nop", sessionId);
     }
 }

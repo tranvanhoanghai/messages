@@ -17,16 +17,12 @@ public interface ConversationRepository extends JpaRepository<Conversation, Inte
     @Query(value = "select * " +
             "from Conversation c " +
             "where ((c.user1 = :user1 and c.user2 = :user2) or (c.user1 = :user2 and c.user2 = :user1))", nativeQuery = true)
-    Conversation checkConversation (@Param("user1") Integer user1, @Param("user2") Integer user2);
+    Conversation checkConversation(@Param("user1") Integer user1, @Param("user2") Integer user2);
 
 
     @Modifying // jpa không hỗ trợ native insert nên phải dùng kèm Annotation @Modifying
     @Transactional
     @Query(value = "insert into Conversation (user1, user2) values (:user1, :user2)", nativeQuery = true)
-    void saveConversation (@Param("user1") Integer user1, @Param("user2") Integer user2);
-
-    // Lấy nội dung tin nhắn từ id Conversation
-//    @Query(value = "select * from Conversation c inner join Messengers m on c.id = m.cvt_id where c.id=?1", nativeQuery = true)
-//    List<Conversation> getMessByIdConversation(Integer idConversation);
+    void saveConversation(@Param("user1") Integer user1, @Param("user2") Integer user2);
 
 }

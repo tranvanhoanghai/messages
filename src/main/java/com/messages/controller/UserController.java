@@ -1,12 +1,20 @@
 package com.messages.controller;
 
+import com.messages.config.FileUploadUtil;
+import com.messages.entity.Comment;
 import com.messages.entity.Friend;
+import com.messages.entity.Post;
 import com.messages.entity.User;
+import com.messages.repository.CommentRepository;
 import com.messages.repository.FriendRepository;
+import com.messages.repository.PostRepository;
 import com.messages.repository.UserRepository;
+import com.messages.service.CommentService;
 import com.messages.service.FriendService;
+import com.messages.service.PostService;
 import com.messages.service.UserService;
 import com.messages.service.impl.UserDetailServiceImpl;
+import com.messages.service.impl.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -19,9 +27,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/profile")
@@ -31,28 +42,38 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
+    private FriendRepository friendRepository;
+
+    @Autowired
+    private PostRepository postRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
     private FriendService friendService;
 
     @Autowired
-    private FriendRepository friendRepository;
+    private PostService postService;
+
+    @Autowired
+    private CommentRepository commentRepository;
+
+    @Autowired
+    private CommentService commentService;
 
     @Value("${upload.path}")
     private String fileUpload;
 
-
-
-
     @GetMapping("/{id}") // profile user
     public String view(@PathVariable(value = "id") Integer id, @AuthenticationPrincipal UserDetailServiceImpl userDetailServiceImpl, Model model )
     {
-        User user =  userService.getUserById(id);
         Friend status = friendService.checkFriendStatus(id, userDetailServiceImpl.getId());
 
         model.addAttribute("count", friendService.countFriend(id));
-        model.addAttribute("profile", user);
+        model.addAttribute("profile",  userService.getUserById(id));
+        model.addAttribute("post", postService.getPostByIdUser(id));
+        model.addAttribute("listFriend", friendRepository.listFriend(id));
 
         if(id.equals(userDetailServiceImpl.getId())){
             return "profile/profile";
@@ -106,5 +127,44 @@ public class UserController {
         }
         userService.uploadUserImg(fileName, id);
         return new RedirectView("/profile/{id}", true);
+    }
+
+    @PostMapping("/createdPost/add/{id}") // add new post
+        public String addNewPost(@PathVariable(value = "id") Integer id, @RequestParam("imagePost") MultipartFile multipartFile, @ModelAttribute("add") Post post) throws IOException {
+
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        String uploadDir = "src/main/resources/static/img/posts/";
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        Date date = new Date();
+        postService.savePost(post.getPostText(), fileName, id, date, date);
+        return  "redirect:/profile/{id}";
+    }
+
+    @GetMapping("/comment/{id}") //
+    @ResponseBody
+    public List<Comment> getComment(@PathVariable(value = "id") Integer id, Model model)
+    {
+        model.addAttribute("success", commentService.getCommentByIdPost(id));
+        return commentService.getCommentByIdPost(id);
+    }
+
+    @GetMapping ("/{id}/changePassword")
+    public String changePassword(@PathVariable(value = "id") Integer id, Model model){
+        model.addAttribute("change", userRepository.findById(id));
+        return "profile/changePassword";
+    }
+
+    @PostMapping("/{id}/changePassword")
+    public RedirectView savePassword(@PathVariable(value = "id") Integer id, HttpServletRequest request, Model model) {
+        String oldPassword = request.getParameter("oldPassword");
+        String password = request.getParameter("password");
+        try {
+            userService.changePassword(id, password, oldPassword);
+            model.addAttribute("success", "Update successful!");
+            return new RedirectView("/profile/{id}/changePassword", true);
+        } catch (UserNotFoundException e) {
+            model.addAttribute("error", "Old password is not precision");
+            return new RedirectView("/profile/{id}/changePassword", true);
+        }
     }
 }

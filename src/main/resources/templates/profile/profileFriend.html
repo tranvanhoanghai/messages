@@ -187,39 +187,57 @@
                 </ul>
             </div>
             <div class="tab-content row post">
-                <div class="col-4 post-item">
-                    <img src="https://br-art.vn/wp-content/uploads/2017/07/background-phong-canh-45.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://br-art.vn/wp-content/uploads/2017/07/background-phong-canh-45.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://br-art.vn/wp-content/uploads/2017/07/background-phong-canh-45.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://br-art.vn/wp-content/uploads/2017/07/background-phong-canh-45.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://br-art.vn/wp-content/uploads/2017/07/background-phong-canh-45.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://br-art.vn/wp-content/uploads/2017/07/background-phong-canh-45.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://st.quantrimang.com/photos/image/2019/10/30/hinh-nen-phong-canh-dep-3.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://st.quantrimang.com/photos/image/2019/10/30/hinh-nen-phong-canh-dep-3.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://st.quantrimang.com/photos/image/2019/10/30/hinh-nen-phong-canh-dep-3.jpg" alt="">
-                </div>
-                <div class="col-4 post-item">
-                    <img src="https://st.quantrimang.com/photos/image/2019/10/30/hinh-nen-phong-canh-dep-3.jpg" alt="">
-                </div>
+                <div class="tab-content row post">
+                    <th:block th:if="${#lists.isEmpty(post)}">
+                        <div class="col-12 text-center">
+                            <h3>User has no posts yet</h3>
+                        </div>
+                    </th:block>
 
-                <div class="col-4 post-item">
-                    <img src="https://st.quantrimang.com/photos/image/2019/10/30/hinh-nen-phong-canh-dep-3.jpg" alt="">
+                    <th:block th:unless="${#lists.isEmpty(post)}" th:each="contentPost : ${post}">
+                        <div class="col-4 post-item" data-bs-toggle="modal" data-bs-target="#showPost">
+                            <img id="img-post" th:src="@{'/img/posts/' + ${contentPost.postImg}}" alt="">
+                            <input type="hidden" th:value="${contentPost.postText}">
+                            <input type="hidden" class="date" th:value="${#dates.format(contentPost.updatedAt, 'dd-MMM-yyyy')}">
+                        </div>
+                    </th:block>
+
+                    <!-- Modal -->
+                    <div class="modal" id="showPost" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl modal-dialog-centered">
+                            <div class="modal-content">
+
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-lg-8">
+                                            <img th:id="view-img" src="" alt="" style="width:100%">
+                                        </div>
+
+                                        <div class="col-lg-4" style="position: relative;">
+                                            <div class="modal-header" style="justify-content: end;">
+                                                <img class="avatar-img" th:src="@{'/img/avatars/' + ${profile.userImg}}">
+                                                <b class="modal-title" th:text="${profile.lastName} +' '+ ${profile.firstName}"> </b>
+                                            </div>
+
+                                            <div class="modal-header" style="justify-content: end; border-bottom:none">
+                                                <img class="avatar-img" th:src="@{'/img/avatars/' + ${profile.userImg}}">
+                                                <b class="modal-title" th:text="${profile.lastName} +' '+ ${profile.firstName}" style="margin-right:10px"> </b>
+                                                <p id="post-text" class="modal-title"></p>
+                                            </div>
+                                            <div class="modal-body" style="overflow-y: auto;">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <p id="post-date" class="modal-title"></p>
+                                                <input type="text" placeholder="Add a comment" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -231,7 +249,19 @@
 
 <th:block id="script">
     <script type="text/javascript">
+        $(document).ready(function(){
+            $(".post-item").click(function(){
+                var img = $(this).find("img").attr('src');
+                $("#view-img").attr('src', img);
 
+                var text = $(this).find("input").val();
+                $("#post-text").text(text);
+
+                var date = $(this).find(".date").val();
+                $("#post-date").text(date);
+            });
+
+        });
 
     </script>
 </th:block>

@@ -1,16 +1,17 @@
 package com.messages.entity;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "post")
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Post extends BaseEntity
 {
     @ManyToOne
@@ -18,11 +19,12 @@ public class Post extends BaseEntity
     private User user_id;
 
     @OneToMany(mappedBy = "post_id", cascade = CascadeType.ALL)
-    private Set<Comment> comments = new HashSet<>();
+    private List<Comment> comments = new ArrayList<>();
 
     @Column(nullable = false)
-    private String content_text_img;
+    private String postText;
 
-    @Column(length = 1, nullable = false)
-    private Integer status;
+    @Column(nullable = false)
+    private String postImg;
+
 }

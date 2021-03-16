@@ -13,21 +13,22 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Conversation extends BaseEntity
 {
     @ManyToOne()
+    @JsonIgnore
+
     @JoinColumn(name = "user1")
-//    @JsonBackReference
     private User user1;
 
     @ManyToOne()
+    @JsonIgnore
+
     @JoinColumn(name = "user2")
-//    @JsonBackReference
     private User user2;
 
     @OneToMany(mappedBy = "cvt_id", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<Messengers> messengers = new ArrayList<>();
 
 }

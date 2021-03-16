@@ -6,8 +6,9 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.sql.Date;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -19,6 +20,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+// @JsonIdentityReference(alwaysAsId = true)
 public class User extends BaseEntity
 {
     @Column
@@ -49,10 +51,14 @@ public class User extends BaseEntity
     private String gender;
 
     @Column()
-    private Date dateOfBirth;
+    private java.sql.Date dateOfBirth;
 
-//    @Column(length = 1)
-//    private String isActive;
+    @Column(name = "reset_password_token")
+    private String resetPasswordToken;
+
+    @Column
+    @Temporal(value = TemporalType.TIMESTAMP)
+    private Date timeActive;
 
     @Column
     private String rememberToken;
@@ -66,7 +72,6 @@ public class User extends BaseEntity
     private Set<Role> roles;
 
     @OneToMany(mappedBy = "user_send", cascade = CascadeType.ALL)
-//    @JsonManagedReference
     private List<Messengers> messengers = new ArrayList<>();
 
     @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL)

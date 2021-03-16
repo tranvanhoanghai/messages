@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.sql.Date;
+
 import java.util.*;
 
 public class UserDetailServiceImpl implements UserDetails { // Custom get user detail
@@ -36,10 +36,6 @@ public class UserDetailServiceImpl implements UserDetails { // Custom get user d
     public Date getDateOfBirth() {
         return user.getDateOfBirth();
     }
-
-//    public String getIsActive() {
-//        return user.getIsActive();
-//    }
 
     public String getGender() {
         return user.getGender();

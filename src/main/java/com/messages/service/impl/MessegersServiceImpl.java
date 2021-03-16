@@ -20,8 +20,8 @@ public class MessegersServiceImpl implements MessengersService {
         return messengersRepository.getMessByIdConversation(id);
     }
 
-    @Override
-    public void saveMess(Integer cvt_id, Integer user_send, Date time_send, String content) {
-        messengersRepository.saveMess(cvt_id, user_send, time_send, content);
-    }
+//    @Override
+//    public void saveMess(Integer cvt_id, Integer user_send, Date time_send, String content) {
+//        messengersRepository.saveMess(cvt_id, user_send, time_send, content);
+//    }
 }

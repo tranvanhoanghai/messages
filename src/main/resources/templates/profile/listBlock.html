@@ -37,8 +37,7 @@
                 <th:block th:unless="${#lists.isEmpty(listBlock)}">
                     <div th:each="block : ${listBlock}">
                         <span th:text="${block.friend_reply.lastName} +' '+ ${block.friend_reply.firstName}"></span>
-                        <span th:text="${block.id}"></span>
-                        <form th:action="@{/cancelFriend/} + ${block.id}" th:object="${update}" method="post" style="display:inline">
+                        <form th:action="@{/unBlock/} + ${block.id}+'/'+${#request.userPrincipal.principal.id} " th:object="${update}" method="post" style="display:inline">
                             <input type="hidden" name="friend_send" th:value="${block.friend_send.id}"/>
                             <input type="hidden" name="friend_reply" th:value="${block.friend_reply.id}"/>
                             <button class="btn btn-outline-primary"> Bỏ chặn</button>
